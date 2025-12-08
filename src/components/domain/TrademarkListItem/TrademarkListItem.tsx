@@ -95,7 +95,7 @@ export function TrademarkListItem({
 
         <button
           onClick={handleFavoriteClick}
-          className="ml-4 shrink-0"
+          className="ml-4 shrink-0 cursor-pointer"
           aria-label={
             isFavorite(trademark.applicationNumber)
               ? "즐겨찾기 제거"
@@ -103,7 +103,7 @@ export function TrademarkListItem({
           }
         >
           <svg
-            className={`w-6 h-6 ${
+            className={`w-6 h-6 hover:text-yellow-400 ${
               isFavorite(trademark.applicationNumber)
                 ? "fill-yellow-400 text-yellow-400"
                 : "fill-none text-gray-400"

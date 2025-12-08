@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useFavorites } from "@/hooks";
-import { Modal } from "@/components/common";
+import { Button, Modal } from "@/components/common";
 import { FavoritesView } from "@/components/domain";
 
 export function Header() {
@@ -19,7 +19,7 @@ export function Header() {
                 className="w-[112px] h-[30px]"
               />
             </h1>
-            <button
+            <Button
               onClick={() => setShowFavorites(true)}
               className="relative px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
             >
@@ -29,7 +29,7 @@ export function Header() {
                   {count}
                 </span>
               )}
-            </button>
+            </Button>
           </div>
         </div>
       </header>

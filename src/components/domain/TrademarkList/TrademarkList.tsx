@@ -8,7 +8,7 @@ import { EmptyState } from "@/components/common/EmptyState/EmptyState";
 import { ErrorMessage } from "@/components/common/ErrorMessage/ErrorMessage";
 
 export function TrademarkList() {
-  const { data, isLoading, error, totalCount, hasMore, currentPage } =
+  const { data, isLoading, error, totalCount, hasMore, currentPage, refetch } =
     useTrademarks();
   const { setSelectedTrademark, setPage } = useTrademarkStore();
 
@@ -45,6 +45,9 @@ export function TrademarkList() {
             ? error.message
             : "데이터를 불러오는 중 오류가 발생했습니다."
         }
+        onRetry={() => {
+          refetch();
+        }}
       />
     );
   }

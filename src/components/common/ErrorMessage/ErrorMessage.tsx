@@ -28,7 +28,7 @@ export function ErrorMessage({ message, onRetry }: ErrorMessageProps) {
           {onRetry && (
             <button
               onClick={onRetry}
-              className="mt-3 text-sm font-medium text-red-800 hover:text-red-900 underline"
+              className="mt-3 text-sm font-medium text-red-800 cursor-pointer hover:text-red-900 underline"
             >
               다시 시도
             </button>

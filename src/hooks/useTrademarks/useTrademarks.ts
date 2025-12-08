@@ -26,7 +26,7 @@ export function useTrademarks() {
   const [isLoadingMore, setIsLoadingMore] = useState(false);
 
   // 데이터 페칭
-  const { data, isLoading, error } = useQuery({
+  const { data, isLoading, error, refetch } = useQuery({
     queryKey: ["trademarks", selectedCountry],
     queryFn: () => fetchTrademarks(selectedCountry),
     staleTime: 5 * 60 * 1000, // 5분
@@ -67,5 +67,6 @@ export function useTrademarks() {
     currentPage: page,
     totalPages,
     hasMore,
+    refetch,
   };
 }
