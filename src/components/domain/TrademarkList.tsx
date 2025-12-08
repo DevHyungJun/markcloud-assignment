@@ -1,4 +1,5 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
+import { useInView } from "react-intersection-observer";
 import { useTrademarks } from "@/hooks/useTrademarks";
 import { useTrademarkStore } from "@/stores/trademarkStore";
 import { TrademarkListItem } from "./TrademarkListItem";
@@ -10,34 +11,18 @@ export function TrademarkList() {
   const { data, isLoading, error, totalCount, hasMore, currentPage } =
     useTrademarks();
   const { setSelectedTrademark, setPage } = useTrademarkStore();
-  const observerRef = useRef<IntersectionObserver | null>(null);
-  const loadMoreRef = useRef<HTMLDivElement | null>(null);
 
   // 무한 스크롤 구현
+  const { ref, inView } = useInView({
+    threshold: 0.1,
+    skip: !hasMore || isLoading,
+  });
+
   useEffect(() => {
-    if (!hasMore || isLoading) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          setPage(currentPage + 1);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (loadMoreRef.current) {
-      observer.observe(loadMoreRef.current);
+    if (inView && hasMore && !isLoading) {
+      setPage(currentPage + 1);
     }
-
-    observerRef.current = observer;
-
-    return () => {
-      if (observerRef.current) {
-        observerRef.current.disconnect();
-      }
-    };
-  }, [hasMore, isLoading, currentPage, setPage]);
+  }, [inView, hasMore, isLoading, currentPage, setPage]);
 
   const isInitialLoading = isLoading && data.length === 0;
   const hasError = !!error;
@@ -89,7 +74,7 @@ export function TrademarkList() {
 
       {isLoadingMore && <TrademarkSkeletonList count={10} />}
 
-      {hasMore && !isLoading && <div ref={loadMoreRef} className="h-10" />}
+      {hasMore && !isLoading && <div ref={ref} className="h-10" />}
     </div>
   );
 }
