@@ -29,6 +29,7 @@ export function TrademarkSearchFilter() {
     register,
     handleSubmit,
     reset,
+    watch,
     formState: { isDirty },
   } = useForm<SearchFormData>({
     defaultValues: {
@@ -38,6 +39,10 @@ export function TrademarkSearchFilter() {
       dateTo: filter.dateTo || "",
     },
   });
+  const wSearchText = watch("searchText");
+  const wApplicationNumber = watch("applicationNumber");
+  const isInvalid =
+    wSearchText.trim() === "" && wApplicationNumber.trim() === "";
 
   // 필터가 외부에서 변경될 때 폼 값 동기화
   useEffect(() => {
@@ -56,11 +61,13 @@ export function TrademarkSearchFilter() {
   ]);
 
   const onSubmit = (data: SearchFormData) => {
+    const { searchText, applicationNumber, dateFrom, dateTo } = data;
+    if (isInvalid) return;
     setFilter({
-      searchText: data.searchText || undefined,
-      applicationNumber: data.applicationNumber || undefined,
-      dateFrom: data.dateFrom || undefined,
-      dateTo: data.dateTo || undefined,
+      searchText: searchText || undefined,
+      applicationNumber: applicationNumber || undefined,
+      dateFrom: dateFrom || undefined,
+      dateTo: dateTo || undefined,
       status: filter.status,
     });
   };
@@ -163,10 +170,15 @@ export function TrademarkSearchFilter() {
 
       {/* 액션 버튼 */}
       <div className="flex justify-end space-x-2 pt-2">
-        <Button type="button" variant="outline" onClick={handleReset}>
+        <Button
+          type="button"
+          variant="outline"
+          onClick={handleReset}
+          disabled={!isDirty || isInvalid}
+        >
           초기화
         </Button>
-        <Button type="submit" disabled={!isDirty}>
+        <Button type="submit" disabled={!isDirty || isInvalid}>
           검색
         </Button>
       </div>
