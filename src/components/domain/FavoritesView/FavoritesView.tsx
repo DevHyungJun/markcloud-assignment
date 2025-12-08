@@ -1,6 +1,6 @@
 import { useFavorites } from "@/hooks/useFavorites";
 import { useTrademarkStore } from "@/stores/trademarkStore";
-import { TrademarkListItem } from "./TrademarkListItem";
+import { TrademarkListItem } from "../TrademarkListItem/TrademarkListItem";
 import { EmptyState } from "@/components/common/EmptyState/EmptyState";
 
 export function FavoritesView() {

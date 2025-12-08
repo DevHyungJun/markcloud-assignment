@@ -1,6 +1,5 @@
-export { TrademarkSearchFilter } from './TrademarkSearchFilter';
-export { TrademarkList } from './TrademarkList';
-export { TrademarkListItem } from './TrademarkListItem';
-export { TrademarkDetailModal } from './TrademarkDetailModal';
-export { FavoritesView } from './FavoritesView';
-
+export { TrademarkSearchFilter } from "./TrademarkSearchFilter/TrademarkSearchFilter";
+export { TrademarkList } from "./TrademarkList/TrademarkList";
+export { TrademarkListItem } from "./TrademarkListItem/TrademarkListItem";
+export { TrademarkDetailModal } from "./TrademarkDetailModal/TrademarkDetailModal";
+export { FavoritesView } from "./FavoritesView/FavoritesView";

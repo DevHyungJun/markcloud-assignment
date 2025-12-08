@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useFavorites } from "@/hooks/useFavorites";
-import { FavoritesView } from "@/components/domain/FavoritesView";
 import { Modal } from "@/components/common";
+import { FavoritesView } from "@/components/domain";
 
 export function Header() {
   const { count } = useFavorites();
