@@ -6,11 +6,10 @@ import path from "path";
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
-    react(),
-    tailwindcss(),
     react({
       babel: { plugins: ["babel-plugin-react-compiler"] },
     }),
+    tailwindcss(),
   ],
   server: {
     port: 3000,
