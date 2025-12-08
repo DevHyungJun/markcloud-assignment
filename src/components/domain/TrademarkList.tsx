@@ -39,11 +39,16 @@ export function TrademarkList() {
     };
   }, [hasMore, isLoading, currentPage, setPage]);
 
-  if (isLoading && data.length === 0) {
-    return <TrademarkSkeletonList count={5} />;
+  const isInitialLoading = isLoading && data.length === 0;
+  const hasError = !!error;
+  const hasNoData = !isLoading && data.length === 0;
+  const isLoadingMore = isLoading && data.length > 0;
+
+  if (isInitialLoading) {
+    return <TrademarkSkeletonList count={10} />;
   }
 
-  if (error) {
+  if (hasError) {
     return (
       <ErrorMessage
         message={
@@ -55,7 +60,7 @@ export function TrademarkList() {
     );
   }
 
-  if (data.length === 0) {
+  if (hasNoData) {
     return (
       <EmptyState
         title="검색 결과가 없습니다"
@@ -82,7 +87,7 @@ export function TrademarkList() {
         ))}
       </div>
 
-      {isLoading && data.length > 0 && <TrademarkSkeletonList count={3} />}
+      {isLoadingMore && <TrademarkSkeletonList count={10} />}
 
       {hasMore && !isLoading && <div ref={loadMoreRef} className="h-10" />}
     </div>
