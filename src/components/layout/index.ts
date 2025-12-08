@@ -1,3 +1,2 @@
-export { Header } from './Header';
-export { MainLayout } from './MainLayout';
-
+export { Header } from "./Header/Header";
+export { MainLayout } from "./MainLayout/MainLayout";

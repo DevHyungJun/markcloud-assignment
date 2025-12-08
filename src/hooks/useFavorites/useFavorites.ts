@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { useTrademarkStore } from "@/stores/trademarkStore";
-import { useTrademarks } from "./useTrademarks";
+import { useTrademarks } from "../useTrademarks/useTrademarks";
 
 export function useFavorites() {
   const { favorites, isFavorite } = useTrademarkStore();

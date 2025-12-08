@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useFavorites } from "@/hooks/useFavorites";
+import { useFavorites } from "@/hooks";
 import { Modal } from "@/components/common";
 import { FavoritesView } from "@/components/domain";
 
