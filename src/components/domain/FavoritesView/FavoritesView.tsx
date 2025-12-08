@@ -20,7 +20,10 @@ export function FavoritesView() {
             "sm:text-3xl"
           )}
         >
-          즐겨찾기 ({favorites.length})
+          즐겨찾기
+          {!isLoading && favorites.length > 0 && (
+            <span>({favorites.length})</span>
+          )}
         </h2>
       </div>
 
