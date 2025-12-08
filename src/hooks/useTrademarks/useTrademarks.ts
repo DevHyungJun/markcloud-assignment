@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useMemo, useState, useEffect } from "react";
 import { NormalizedTrademark, Country } from "@/types/trademark/trademark";
-import { adaptTrademarks, filterTrademarks } from "@/utils";
+import { adaptTrademarks, filterTrademarks, sortTrademarks } from "@/utils";
 import { useTrademarkStore } from "@/stores/trademarkStore";
 import { COUNTRY_DATA_SOURCES } from "@/constants/COUNTRY_DATA_SOURCES";
 
@@ -19,7 +19,7 @@ async function fetchTrademarks(
 }
 
 export function useTrademarks(page: number) {
-  const { selectedCountry, filter } = useTrademarkStore();
+  const { selectedCountry, filter, sortOrder } = useTrademarkStore();
   const [isLoadingMore, setIsLoadingMore] = useState(false);
 
   // 데이터 페칭
@@ -29,11 +29,12 @@ export function useTrademarks(page: number) {
     staleTime: 5 * 60 * 1000, // 5분
   });
 
-  // 필터링된 데이터
+  // 필터링 및 정렬된 데이터
   const filteredData = useMemo(() => {
     if (!data) return [];
-    return filterTrademarks(data, { ...filter, country: selectedCountry });
-  }, [data, filter, selectedCountry]);
+    const filtered = filterTrademarks(data, { ...filter, country: selectedCountry });
+    return sortTrademarks(filtered, sortOrder);
+  }, [data, filter, selectedCountry, sortOrder]);
 
   // 페이지네이션 (누적 데이터 - 무한 스크롤용)
   const paginatedData = useMemo(() => {

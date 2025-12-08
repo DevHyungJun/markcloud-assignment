@@ -6,6 +6,8 @@ import {
   NormalizedTrademark,
 } from "@/types/trademark/trademark";
 
+type SortOrder = "dateDesc" | "dateAsc";
+
 interface TrademarkStore {
   // 현재 선택된 국가
   selectedCountry: Country;
@@ -15,6 +17,10 @@ interface TrademarkStore {
   filter: TrademarkFilter;
   setFilter: (filter: Partial<TrademarkFilter>) => void;
   resetFilter: () => void;
+
+  // 정렬
+  sortOrder: SortOrder;
+  setSortOrder: (order: SortOrder) => void;
 
   // 즐겨찾기
   favorites: Set<string>; // applicationNumber Set
@@ -46,6 +52,11 @@ export const useTrademarkStore = create<TrademarkStore>()(
         set({
           filter: { ...initialFilter, country: get().selectedCountry },
         });
+      },
+
+      sortOrder: "dateDesc" as SortOrder, // 기본값: 출원일 최신순
+      setSortOrder: (order) => {
+        set({ sortOrder: order });
       },
 
       favorites: new Set<string>(),
