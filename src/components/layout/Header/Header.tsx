@@ -32,6 +32,7 @@ export function Header() {
                 )}
               >
                 <Icon.Favorite
+                  aria-label="즐겨찾기 목록 이동"
                   className={cn(
                     "w-4 h-4 text-yellow-500",
                     count > 0 && "fill-yellow-500"
