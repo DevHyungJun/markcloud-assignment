@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { useTrademarks } from "@/hooks/useTrademarks/useTrademarks";
 import { useTrademarkStore } from "@/stores/trademarkStore";
@@ -8,9 +8,16 @@ import { EmptyState } from "@/components/common/EmptyState/EmptyState";
 import { ErrorMessage } from "@/components/common/ErrorMessage/ErrorMessage";
 
 export function TrademarkList() {
+  const { setSelectedTrademark, filter } = useTrademarkStore();
+  const [page, setPage] = useState(1);
+
+  // 필터가 변경되면 페이지 리셋
+  useEffect(() => {
+    setPage(1);
+  }, [filter]);
+
   const { data, isLoading, error, totalCount, hasMore, currentPage, refetch } =
-    useTrademarks();
-  const { setSelectedTrademark, setPage } = useTrademarkStore();
+    useTrademarks(page);
 
   // 무한 스크롤 구현
   const { ref, inView } = useInView({
@@ -26,7 +33,7 @@ export function TrademarkList() {
       }, 100);
       return () => clearTimeout(timer);
     }
-  }, [inView, hasMore, isLoading, currentPage, setPage]);
+  }, [inView, hasMore, isLoading, currentPage]);
 
   const isInitialLoading = isLoading && data.length === 0;
   const hasError = !!error;

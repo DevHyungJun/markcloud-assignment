@@ -23,11 +23,6 @@ interface TrademarkStore {
   // 선택된 상표 (상세 보기용)
   selectedTrademark: NormalizedTrademark | null;
   setSelectedTrademark: (trademark: NormalizedTrademark | null) => void;
-
-  // 무한 스크롤 페이지
-  page: number;
-  setPage: (page: number) => void;
-  resetPage: () => void;
 }
 
 const initialFilter: TrademarkFilter = {
@@ -42,12 +37,11 @@ export const useTrademarkStore = create<TrademarkStore>((set, get) => ({
 
   filter: initialFilter,
   setFilter: (newFilter) => {
-    set({ filter: { ...get().filter, ...newFilter }, page: 1 });
+    set({ filter: { ...get().filter, ...newFilter } });
   },
   resetFilter: () => {
     set({
       filter: { ...initialFilter, country: get().selectedCountry },
-      page: 1,
     });
   },
 
@@ -69,8 +63,4 @@ export const useTrademarkStore = create<TrademarkStore>((set, get) => ({
   setSelectedTrademark: (trademark) => {
     set({ selectedTrademark: trademark });
   },
-
-  page: 1,
-  setPage: (page) => set({ page }),
-  resetPage: () => set({ page: 1 }),
 }));

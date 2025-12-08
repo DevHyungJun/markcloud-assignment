@@ -4,7 +4,7 @@ import { useTrademarks } from "../useTrademarks/useTrademarks";
 
 export function useFavorites() {
   const { favorites, isFavorite } = useTrademarkStore();
-  const { allData } = useTrademarks();
+  const { allData } = useTrademarks(1);
 
   const favoriteTrademarks = useMemo(() => {
     return allData.filter((trademark) =>

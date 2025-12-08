@@ -25,8 +25,8 @@ async function fetchTrademarks(
   return adaptTrademarks(dataSource as any[], country);
 }
 
-export function useTrademarks() {
-  const { selectedCountry, filter, page } = useTrademarkStore();
+export function useTrademarks(page: number) {
+  const { selectedCountry, filter } = useTrademarkStore();
   const [isLoadingMore, setIsLoadingMore] = useState(false);
 
   // 데이터 페칭
