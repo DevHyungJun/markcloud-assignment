@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { useQueries } from "@tanstack/react-query";
 import { MainLayout } from "@/components/layout";
 import { NormalizedTrademark, Country } from "@/types/trademark/trademark";
-import { adaptTrademarks } from "@/utils";
+import { adaptTrademarks, cn } from "@/utils";
 import { COUNTRY_DATA_SOURCES } from "@/constants/COUNTRY_DATA_SOURCES";
 import { getCountryOptions } from "@/config/countryConfig";
 import {
@@ -102,11 +102,21 @@ export function StatisticsPage() {
   return (
     <MainLayout>
       <div className="space-y-6">
-        <div className="bg-white p-6 rounded-lg shadow-md">
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">
+        <div>
+          <h2
+            className={cn(
+              "text-xl tracking-tight leading-tight font-bold text-gray-900 mb-2",
+              "sm:text-3xl"
+            )}
+          >
             상표 데이터 통계 및 분석
           </h2>
-          <p className="text-gray-600">
+          <p
+            className={cn(
+              "text-gray-400 font-medium text-xs leading-relaxed",
+              "sm:text-sm"
+            )}
+          >
             {availableCountries.length > 0
               ? `${availableCountries.length}개 국가의 상표 데이터를 비교 분석합니다.`
               : "상표 데이터를 비교 분석합니다."}

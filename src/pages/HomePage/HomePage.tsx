@@ -8,7 +8,7 @@ export function HomePage() {
       <div className="mb-6">
         <h2
           className={cn(
-            "text-2xl tracking-tight leading-tight font-bold text-gray-900 mb-2",
+            "text-xl tracking-tight leading-tight font-bold text-gray-900 mb-2",
             "sm:text-3xl"
           )}
         >

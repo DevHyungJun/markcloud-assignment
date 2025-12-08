@@ -4,6 +4,7 @@ import { NormalizedTrademark } from "@/types/trademark/trademark";
 import { TrademarkListItem } from "../TrademarkListItem/TrademarkListItem";
 import { TrademarkDetailModal } from "../TrademarkDetailModal/TrademarkDetailModal";
 import { EmptyState } from "@/components/common";
+import { cn } from "@/utils";
 
 export function FavoritesView() {
   const { favorites } = useFavorites();
@@ -22,7 +23,12 @@ export function FavoritesView() {
   return (
     <div className="space-y-4">
       <div className="flex justify-between items-center">
-        <h2 className="text-xl font-semibold text-gray-900">
+        <h2
+          className={cn(
+            "text-xl tracking-tight leading-tight font-bold text-gray-900 mb-2",
+            "sm:text-3xl"
+          )}
+        >
           즐겨찾기 ({favorites.length})
         </h2>
       </div>
