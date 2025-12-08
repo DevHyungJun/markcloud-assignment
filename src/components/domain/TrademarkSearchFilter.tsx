@@ -11,6 +11,14 @@ const STATUS_OPTIONS: { value: TrademarkStatus; label: string }[] = [
   { value: "LIVE", label: "LIVE" },
 ];
 
+const KR_STATUS_OPTIONS = STATUS_OPTIONS.filter(
+  (option) => option.value !== "LIVE"
+);
+
+const US_STATUS_OPTIONS = STATUS_OPTIONS.filter(
+  (option) => option.value === "DEAD" || option.value === "LIVE"
+);
+
 export function TrademarkSearchFilter() {
   const {
     filter,
@@ -121,7 +129,10 @@ export function TrademarkSearchFilter() {
           등록 상태
         </label>
         <div className="flex flex-wrap gap-2">
-          {STATUS_OPTIONS.map((option) => {
+          {(selectedCountry === "KR"
+            ? KR_STATUS_OPTIONS
+            : US_STATUS_OPTIONS
+          ).map((option) => {
             const isSelected = filter.status?.includes(option.value);
             return (
               <button
