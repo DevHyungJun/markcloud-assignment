@@ -19,7 +19,7 @@ export function useFavorites() {
   const { favorites, isFavorite } = useTrademarkStore();
 
   // 모든 국가의 데이터를 가져옴
-  const { data: allTrademarks = [] } = useQuery({
+  const { data: allTrademarks = [], isLoading } = useQuery({
     queryKey: ["allTrademarks"],
     queryFn: fetchAllTrademarks,
     staleTime: 5 * 60 * 1000, // 5분
@@ -35,5 +35,6 @@ export function useFavorites() {
     favorites: favoriteTrademarks,
     count: favorites.size,
     isFavorite,
+    isLoading,
   };
 }

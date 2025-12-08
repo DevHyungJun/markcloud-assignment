@@ -3,22 +3,13 @@ import { useFavorites } from "@/hooks";
 import { NormalizedTrademark } from "@/types/trademark/trademark";
 import { TrademarkListItem } from "../TrademarkListItem/TrademarkListItem";
 import { TrademarkDetailModal } from "../TrademarkDetailModal/TrademarkDetailModal";
-import { EmptyState } from "@/components/common";
+import { EmptyState, TrademarkSkeletonList } from "@/components/common";
 import { cn } from "@/utils";
 
 export function FavoritesView() {
-  const { favorites } = useFavorites();
+  const { favorites, isLoading } = useFavorites();
   const [selectedTrademark, setSelectedTrademark] =
     useState<NormalizedTrademark | null>(null);
-
-  if (favorites.length === 0) {
-    return (
-      <EmptyState
-        title="즐겨찾기가 없습니다"
-        description="상표 목록에서 별 아이콘을 클릭하여 즐겨찾기에 추가하세요."
-      />
-    );
-  }
 
   return (
     <div className="space-y-4">
@@ -34,15 +25,24 @@ export function FavoritesView() {
       </div>
 
       <div className="space-y-3">
-        {favorites.map((trademark) => (
-          <TrademarkListItem
-            key={trademark.id}
-            trademark={trademark}
-            onClick={() => setSelectedTrademark(trademark)}
-          />
-        ))}
+        {isLoading ? (
+          <TrademarkSkeletonList count={10} />
+        ) : (
+          favorites.map((trademark) => (
+            <TrademarkListItem
+              key={trademark.id}
+              trademark={trademark}
+              onClick={() => setSelectedTrademark(trademark)}
+            />
+          ))
+        )}
       </div>
-
+      {favorites.length === 0 && !isLoading && (
+        <EmptyState
+          title="즐겨찾기가 없습니다"
+          description="상표 목록에서 별 아이콘을 클릭하여 즐겨찾기에 추가하세요."
+        />
+      )}
       <TrademarkDetailModal
         trademark={selectedTrademark}
         onClose={() => setSelectedTrademark(null)}
