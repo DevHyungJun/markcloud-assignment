@@ -20,7 +20,11 @@ export function TrademarkList() {
 
   useEffect(() => {
     if (inView && hasMore && !isLoading) {
-      setPage(currentPage + 1);
+      // 약간의 딜레이를 추가하여 점진적 로딩 효과
+      const timer = setTimeout(() => {
+        setPage(currentPage + 1);
+      }, 100);
+      return () => clearTimeout(timer);
     }
   }, [inView, hasMore, isLoading, currentPage, setPage]);
 
@@ -72,7 +76,7 @@ export function TrademarkList() {
         ))}
       </div>
 
-      {isLoadingMore && <TrademarkSkeletonList count={10} />}
+      {isLoadingMore && <TrademarkSkeletonList count={3} />}
 
       {hasMore && !isLoading && <div ref={ref} className="h-10" />}
     </div>

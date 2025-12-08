@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { useMemo } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import { NormalizedTrademark, Country } from '@/types/trademark';
 import { adaptTrademarks } from '@/utils/adapters/trademarkAdapter';
 import { filterTrademarks } from '@/utils/filters/trademarkFilter';
@@ -7,7 +7,7 @@ import { useTrademarkStore } from '@/stores/trademarkStore';
 import krData from '@/mockData/trademarks_kr_trademarks.json';
 import usData from '@/mockData/trademarks_us_trademarks.json';
 
-const ITEMS_PER_PAGE = 20;
+const ITEMS_PER_PAGE = 10; // 페이지당 아이템 수를 줄여서 점진적 로딩 효과
 
 // Mock API 함수
 async function fetchTrademarks(country: Country): Promise<NormalizedTrademark[]> {
@@ -22,6 +22,7 @@ async function fetchTrademarks(country: Country): Promise<NormalizedTrademark[]>
 
 export function useTrademarks() {
   const { selectedCountry, filter, page } = useTrademarkStore();
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
 
   // 데이터 페칭
   const { data, isLoading, error } = useQuery({
@@ -42,13 +43,24 @@ export function useTrademarks() {
     return filteredData.slice(0, end);
   }, [filteredData, page]);
 
+  // 페이지 증가 시 로딩 상태 시뮬레이션
+  useEffect(() => {
+    if (page > 1 && !isLoading) {
+      setIsLoadingMore(true);
+      const timer = setTimeout(() => {
+        setIsLoadingMore(false);
+      }, 500); // 페이지 로딩 시뮬레이션 시간
+      return () => clearTimeout(timer);
+    }
+  }, [page, isLoading]);
+
   const totalPages = Math.ceil(filteredData.length / ITEMS_PER_PAGE);
   const hasMore = page < totalPages;
 
   return {
     data: paginatedData,
     allData: filteredData,
-    isLoading,
+    isLoading: isLoading || isLoadingMore,
     error,
     totalCount: filteredData.length,
     currentPage: page,
