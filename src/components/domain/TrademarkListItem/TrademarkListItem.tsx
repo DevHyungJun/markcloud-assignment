@@ -2,6 +2,7 @@ import { NormalizedTrademark } from "@/types/trademark/trademark";
 import { useTrademarkStore } from "@/stores/trademarkStore";
 import { cn, formatDate } from "@/utils";
 import { Icon } from "@/components/common";
+import { shouldShowField } from "@/config/countryConfig";
 
 interface TrademarkListItemProps {
   trademark: NormalizedTrademark;
@@ -74,14 +75,15 @@ export function TrademarkListItem({
                 {formatDate(trademark.applicationDate)}
               </span>
             </div>
-            {trademark.country === "KR" && trademark.publicationNumber && (
-              <div>
-                <span className="font-medium">공고번호:</span>{" "}
-                <span className="text-gray-900">
-                  {trademark.publicationNumber}
-                </span>
-              </div>
-            )}
+            {shouldShowField(trademark.country, "publicationNumber") &&
+              trademark.publicationNumber && (
+                <div>
+                  <span className="font-medium">공고번호:</span>{" "}
+                  <span className="text-gray-900">
+                    {trademark.publicationNumber}
+                  </span>
+                </div>
+              )}
             {trademark.registrationNumber &&
               trademark.registrationNumber.length > 0 && (
                 <div>

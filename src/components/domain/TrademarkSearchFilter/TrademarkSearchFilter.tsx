@@ -4,44 +4,10 @@ import { useTrademarkStore } from "@/stores/trademarkStore";
 import { TrademarkStatus, Country } from "@/types/trademark/trademark";
 import { Button, Input } from "@/components/common";
 import { cn } from "@/utils";
-
-const STATUS_OPTIONS: { value: TrademarkStatus; label: string }[] = [
-  { value: "REGISTERED", label: "등록" },
-  { value: "PENDING", label: "출원" },
-  { value: "REJECTED", label: "거절" },
-  { value: "DEAD", label: "실효" },
-  { value: "LIVE", label: "LIVE" },
-];
-
-const KR_STATUS_OPTIONS = STATUS_OPTIONS.filter(
-  (option) => option.value !== "LIVE"
-);
-
-const US_STATUS_OPTIONS = STATUS_OPTIONS.filter(
-  (option) => option.value === "DEAD" || option.value === "LIVE"
-);
-
-const COUNTRY_OPTIONS: {
-  value: Country;
-  label: string;
-  flagUrl: string;
-  flagAlt: string;
-}[] = [
-  {
-    value: "KR",
-    label: "한국",
-    flagUrl:
-      "https://img.icons8.com/?size=100&id=-_RS8ho736Fs&format=png&color=000000",
-    flagAlt: "한국",
-  },
-  {
-    value: "US",
-    label: "미국",
-    flagUrl:
-      "https://img.icons8.com/?size=100&id=aRiu1GGi6Aoe&format=png&color=000000",
-    flagAlt: "미국",
-  },
-];
+import {
+  getStatusOptionsForCountry,
+  getCountryOptions,
+} from "@/config/countryConfig";
 
 interface SearchFormData {
   searchText: string;
@@ -122,13 +88,16 @@ export function TrademarkSearchFilter() {
     setFilter({ status: undefined }); // 국가 변경 시 상태 필터 초기화
   };
 
+  const countryOptions = getCountryOptions();
+  const statusOptions = getStatusOptionsForCountry(selectedCountry);
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
       className="bg-white p-6 rounded-lg shadow-md space-y-4"
     >
       <div className="flex space-x-2 border-b pb-4">
-        {COUNTRY_OPTIONS.map((country) => (
+        {countryOptions.map((country) => (
           <button
             key={country.value}
             type="button"
@@ -171,10 +140,7 @@ export function TrademarkSearchFilter() {
           등록 상태
         </label>
         <div className="flex flex-wrap gap-2">
-          {(selectedCountry === "KR"
-            ? KR_STATUS_OPTIONS
-            : US_STATUS_OPTIONS
-          ).map((option) => {
+          {statusOptions.map((option) => {
             const isSelected = filter.status?.includes(option.value);
             return (
               <button

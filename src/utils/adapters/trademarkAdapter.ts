@@ -5,6 +5,7 @@ import {
   TrademarkStatus,
   Country,
 } from "@/types/trademark/trademark";
+import { getCountryAdapter } from "@/config/countryConfig";
 
 // 한국 상태를 공통 상태로 변환
 function normalizeKrStatus(status: string): TrademarkStatus {
@@ -77,15 +78,13 @@ export function adaptUsTrademark(raw: UsTrademarkRaw): NormalizedTrademark {
   };
 }
 
-// 통합 어댑터
+// 통합 어댑터 (설정 기반)
 export function adaptTrademark(
   raw: KrTrademarkRaw | UsTrademarkRaw,
   country: Country
 ): NormalizedTrademark {
-  if (country === "KR") {
-    return adaptKrTrademark(raw as KrTrademarkRaw);
-  }
-  return adaptUsTrademark(raw as UsTrademarkRaw);
+  const adapter = getCountryAdapter(country);
+  return adapter(raw);
 }
 
 // 배열 어댑터

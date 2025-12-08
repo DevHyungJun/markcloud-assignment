@@ -1,6 +1,7 @@
 import { Modal } from "@/components/common";
 import { NormalizedTrademark } from "@/types/trademark/trademark";
 import { formatDate } from "@/utils";
+import { shouldShowField } from "@/config/countryConfig";
 
 interface TrademarkDetailModalProps {
   trademark: NormalizedTrademark | null;
@@ -76,8 +77,9 @@ export function TrademarkDetailModal({
           </div>
         </section>
 
-        {/* 공고 정보 (한국만) */}
-        {trademark.country === "KR" && trademark.publicationNumber && (
+        {/* 공고 정보 */}
+        {shouldShowField(trademark.country, "publicationNumber") &&
+          trademark.publicationNumber && (
           <section>
             <h3 className="text-lg font-semibold text-gray-900 mb-4">
               공고 정보
@@ -132,7 +134,10 @@ export function TrademarkDetailModal({
                       </p>
                     </div>
                   )}
-                {trademark.country === "KR" &&
+                {shouldShowField(
+                  trademark.country,
+                  "registrationPubNumber"
+                ) &&
                   trademark.registrationPubNumber && (
                     <div>
                       <label className="block text-sm font-medium text-gray-500">
@@ -143,7 +148,10 @@ export function TrademarkDetailModal({
                       </p>
                     </div>
                   )}
-                {trademark.country === "KR" &&
+                {shouldShowField(
+                  trademark.country,
+                  "registrationPubDate"
+                ) &&
                   trademark.registrationPubDate && (
                     <div>
                       <label className="block text-sm font-medium text-gray-500">
@@ -172,7 +180,8 @@ export function TrademarkDetailModal({
                 {trademark.productCodes.mainCodes.join(", ")}
               </p>
             </div>
-            {trademark.country === "KR" && trademark.productCodes.subCodes && (
+            {shouldShowField(trademark.country, "subCodes") &&
+              trademark.productCodes.subCodes && (
               <div>
                 <label className="block text-sm font-medium text-gray-500">
                   유사군 코드
@@ -182,7 +191,7 @@ export function TrademarkDetailModal({
                 </p>
               </div>
             )}
-            {trademark.country === "US" &&
+            {shouldShowField(trademark.country, "usClassCodes") &&
               trademark.productCodes.usClassCodes && (
                 <div>
                   <label className="block text-sm font-medium text-gray-500">
