@@ -5,3 +5,4 @@ export { adaptTrademark } from "./adapters/trademarkAdapter";
 export { formatDate } from "./date/formatDate";
 export { sortTrademarks } from "./sortTrademarks";
 export type { SortOrder } from "./sortTrademarks";
+export * from "./statistics/aggregateStatistics";

@@ -7,6 +7,7 @@ export function Header() {
   const { count } = useFavorites();
   const location = useLocation();
   const isFavoritesPage = location.pathname === "/favorites";
+  const isStatisticsPage = location.pathname === "/statistics";
 
   return (
     <header className="bg-sky-200 shadow-sm sticky top-0 z-50">
@@ -22,32 +23,48 @@ export function Header() {
               className="w-[112px] h-[30px]"
             />
           </Link>
-          {!isFavoritesPage && (
-            <Button
-              as={Link}
-              to="/favorites"
-              className={cn(
-                "relative flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md",
-                "hover:bg-gray-50",
-                "focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-              )}
-              aria-label="즐겨찾기 목록 이동"
-            >
-              <Icon.Favorite
-                aria-label="즐겨찾기 목록 이동"
+          <div className="flex items-center gap-2">
+            {!isStatisticsPage && (
+              <Button
+                as={Link}
+                to="/statistics"
                 className={cn(
-                  "w-4 h-4 text-yellow-500",
-                  count > 0 && "fill-yellow-500"
+                  "flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md",
+                  "hover:bg-gray-50",
+                  "focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                 )}
-              />
-              즐겨찾기
-              {count > 0 && (
-                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                  {count}
-                </span>
-              )}
-            </Button>
-          )}
+              >
+                <Icon.Statistics className="w-4 h-4" />
+                통계/분석
+              </Button>
+            )}
+            {!isFavoritesPage && (
+              <Button
+                as={Link}
+                to="/favorites"
+                className={cn(
+                  "relative flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md",
+                  "hover:bg-gray-50",
+                  "focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                )}
+                aria-label="즐겨찾기 목록 이동"
+              >
+                <Icon.Favorite
+                  aria-label="즐겨찾기 목록 이동"
+                  className={cn(
+                    "w-4 h-4 text-yellow-500",
+                    count > 0 && "fill-yellow-500"
+                  )}
+                />
+                즐겨찾기
+                {count > 0 && (
+                  <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                    {count}
+                  </span>
+                )}
+              </Button>
+            )}
+          </div>
         </div>
       </div>
     </header>
