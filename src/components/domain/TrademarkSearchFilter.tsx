@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useTrademarkStore } from "@/stores/trademarkStore";
 import { TrademarkStatus, Country } from "@/types/trademark";
 import { Button, Input } from "@/components/common";
-import { cn } from "@/utils/cn/cn";
+import { cn } from "@/utils";
 
 const STATUS_OPTIONS: { value: TrademarkStatus; label: string }[] = [
   { value: "REGISTERED", label: "등록" },

@@ -1,14 +1,15 @@
-import { useMemo } from 'react';
-import { useTrademarkStore } from '@/stores/trademarkStore';
-import { useTrademarks } from './useTrademarks';
-import { NormalizedTrademark } from '@/types/trademark';
+import { useMemo } from "react";
+import { useTrademarkStore } from "@/stores/trademarkStore";
+import { useTrademarks } from "./useTrademarks";
 
 export function useFavorites() {
   const { favorites, isFavorite } = useTrademarkStore();
   const { allData } = useTrademarks();
 
   const favoriteTrademarks = useMemo(() => {
-    return allData.filter((trademark) => isFavorite(trademark.applicationNumber));
+    return allData.filter((trademark) =>
+      isFavorite(trademark.applicationNumber)
+    );
   }, [allData, favorites, isFavorite]);
 
   return {
@@ -17,4 +18,3 @@ export function useFavorites() {
     isFavorite,
   };
 }
-

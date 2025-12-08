@@ -1,6 +1,6 @@
 import { NormalizedTrademark } from "@/types/trademark";
 import { useTrademarkStore } from "@/stores/trademarkStore";
-import { formatDate } from "@/utils/date/formatDate";
+import { formatDate } from "@/utils";
 
 interface TrademarkListItemProps {
   trademark: NormalizedTrademark;

@@ -1,23 +1,24 @@
-import { useQuery } from '@tanstack/react-query';
-import { useMemo, useState, useEffect } from 'react';
-import { NormalizedTrademark, Country } from '@/types/trademark';
-import { adaptTrademarks } from '@/utils/adapters/trademarkAdapter';
-import { filterTrademarks } from '@/utils/filters/trademarkFilter';
-import { useTrademarkStore } from '@/stores/trademarkStore';
-import krData from '@/mockData/trademarks_kr_trademarks.json';
-import usData from '@/mockData/trademarks_us_trademarks.json';
+import { useQuery } from "@tanstack/react-query";
+import { useMemo, useState, useEffect } from "react";
+import { NormalizedTrademark, Country } from "@/types/trademark";
+import { adaptTrademarks, filterTrademarks } from "@/utils";
+import { useTrademarkStore } from "@/stores/trademarkStore";
+import krData from "@/mockData/trademarks_kr_trademarks.json";
+import usData from "@/mockData/trademarks_us_trademarks.json";
 
 const ITEMS_PER_PAGE = 10; // 페이지당 아이템 수를 줄여서 점진적 로딩 효과
 
 // Mock API 함수
-async function fetchTrademarks(country: Country): Promise<NormalizedTrademark[]> {
+async function fetchTrademarks(
+  country: Country
+): Promise<NormalizedTrademark[]> {
   // 실제로는 API 호출이지만, 여기서는 mock 데이터 사용
   await new Promise((resolve) => setTimeout(resolve, 300)); // 로딩 시뮬레이션
-  
-  if (country === 'KR') {
-    return adaptTrademarks(krData as any[], 'KR');
+
+  if (country === "KR") {
+    return adaptTrademarks(krData as any[], "KR");
   }
-  return adaptTrademarks(usData as any[], 'US');
+  return adaptTrademarks(usData as any[], "US");
 }
 
 export function useTrademarks() {
@@ -26,7 +27,7 @@ export function useTrademarks() {
 
   // 데이터 페칭
   const { data, isLoading, error } = useQuery({
-    queryKey: ['trademarks', selectedCountry],
+    queryKey: ["trademarks", selectedCountry],
     queryFn: () => fetchTrademarks(selectedCountry),
     staleTime: 5 * 60 * 1000, // 5분
   });
@@ -68,4 +69,3 @@ export function useTrademarks() {
     hasMore,
   };
 }
-
