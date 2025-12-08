@@ -1,13 +1,14 @@
-import { useEffect, useRef } from 'react';
-import { useTrademarks } from '@/hooks/useTrademarks';
-import { useTrademarkStore } from '@/stores/trademarkStore';
-import { TrademarkListItem } from './TrademarkListItem';
-import { LoadingSpinner } from '@/components/common/LoadingSpinner';
-import { EmptyState } from '@/components/common/EmptyState';
-import { ErrorMessage } from '@/components/common/ErrorMessage';
+import { useEffect, useRef } from "react";
+import { useTrademarks } from "@/hooks/useTrademarks";
+import { useTrademarkStore } from "@/stores/trademarkStore";
+import { TrademarkListItem } from "./TrademarkListItem";
+import { TrademarkSkeletonList } from "@/components/common/TrademarkSkeleton";
+import { EmptyState } from "@/components/common/EmptyState";
+import { ErrorMessage } from "@/components/common/ErrorMessage";
 
 export function TrademarkList() {
-  const { data, isLoading, error, totalCount, hasMore, currentPage } = useTrademarks();
+  const { data, isLoading, error, totalCount, hasMore, currentPage } =
+    useTrademarks();
   const { setSelectedTrademark, setPage } = useTrademarkStore();
   const observerRef = useRef<IntersectionObserver | null>(null);
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
@@ -39,13 +40,17 @@ export function TrademarkList() {
   }, [hasMore, isLoading, currentPage, setPage]);
 
   if (isLoading && data.length === 0) {
-    return <LoadingSpinner />;
+    return <TrademarkSkeletonList count={5} />;
   }
 
   if (error) {
     return (
       <ErrorMessage
-        message={error instanceof Error ? error.message : '데이터를 불러오는 중 오류가 발생했습니다.'}
+        message={
+          error instanceof Error
+            ? error.message
+            : "데이터를 불러오는 중 오류가 발생했습니다."
+        }
       />
     );
   }
@@ -77,16 +82,9 @@ export function TrademarkList() {
         ))}
       </div>
 
-      {isLoading && data.length > 0 && (
-        <div className="flex justify-center py-4">
-          <LoadingSpinner />
-        </div>
-      )}
+      {isLoading && data.length > 0 && <TrademarkSkeletonList count={3} />}
 
-      {hasMore && !isLoading && (
-        <div ref={loadMoreRef} className="h-10" />
-      )}
+      {hasMore && !isLoading && <div ref={loadMoreRef} className="h-10" />}
     </div>
   );
 }
-
