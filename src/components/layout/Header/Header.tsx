@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { useFavorites } from "@/hooks";
-import { Button } from "@/components/common";
+import { Button, Icon } from "@/components/common";
 import { cn } from "@/utils";
 
 export function Header() {
@@ -26,11 +26,17 @@ export function Header() {
             <Link to="/favorites">
               <Button
                 className={cn(
-                  "relative px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md",
+                  "relative flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md",
                   "hover:bg-gray-50",
                   "focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                 )}
               >
+                <Icon.Favorite
+                  className={cn(
+                    "w-4 h-4 text-yellow-500",
+                    count > 0 && "fill-yellow-500"
+                  )}
+                />
                 즐겨찾기
                 {count > 0 && (
                   <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
