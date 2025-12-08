@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect } from "react";
+import { useForm } from "react-hook-form";
 import { useTrademarkStore } from "@/stores/trademarkStore";
 import { TrademarkStatus, Country } from "@/types/trademark/trademark";
 import { Button, Input } from "@/components/common";
@@ -42,6 +43,13 @@ const COUNTRY_OPTIONS: {
   },
 ];
 
+interface SearchFormData {
+  searchText: string;
+  applicationNumber: string;
+  dateFrom: string;
+  dateTo: string;
+}
+
 export function TrademarkSearchFilter() {
   const {
     filter,
@@ -50,23 +58,55 @@ export function TrademarkSearchFilter() {
     selectedCountry,
     setSelectedCountry,
   } = useTrademarkStore();
-  const [localSearchText, setLocalSearchText] = useState(
-    filter.searchText || ""
-  );
-  const [localApplicationNumber, setLocalApplicationNumber] = useState(
-    filter.applicationNumber || ""
-  );
-  const [localDateFrom, setLocalDateFrom] = useState(filter.dateFrom || "");
-  const [localDateTo, setLocalDateTo] = useState(filter.dateTo || "");
 
-  const handleSearch = () => {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { isDirty },
+  } = useForm<SearchFormData>({
+    defaultValues: {
+      searchText: filter.searchText || "",
+      applicationNumber: filter.applicationNumber || "",
+      dateFrom: filter.dateFrom || "",
+      dateTo: filter.dateTo || "",
+    },
+  });
+
+  // 필터가 외부에서 변경될 때 폼 값 동기화
+  useEffect(() => {
+    reset({
+      searchText: filter.searchText || "",
+      applicationNumber: filter.applicationNumber || "",
+      dateFrom: filter.dateFrom || "",
+      dateTo: filter.dateTo || "",
+    });
+  }, [
+    filter.searchText,
+    filter.applicationNumber,
+    filter.dateFrom,
+    filter.dateTo,
+    reset,
+  ]);
+
+  const onSubmit = (data: SearchFormData) => {
     setFilter({
-      searchText: localSearchText || undefined,
-      applicationNumber: localApplicationNumber || undefined,
-      dateFrom: localDateFrom || undefined,
-      dateTo: localDateTo || undefined,
+      searchText: data.searchText || undefined,
+      applicationNumber: data.applicationNumber || undefined,
+      dateFrom: data.dateFrom || undefined,
+      dateTo: data.dateTo || undefined,
       status: filter.status,
     });
+  };
+
+  const handleReset = () => {
+    reset({
+      searchText: "",
+      applicationNumber: "",
+      dateFrom: "",
+      dateTo: "",
+    });
+    resetFilter();
   };
 
   const handleStatusToggle = (status: TrademarkStatus) => {
@@ -83,11 +123,15 @@ export function TrademarkSearchFilter() {
   };
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md space-y-4">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="bg-white p-6 rounded-lg shadow-md space-y-4"
+    >
       <div className="flex space-x-2 border-b pb-4">
         {COUNTRY_OPTIONS.map((country) => (
           <button
             key={country.value}
+            type="button"
             onClick={() => handleCountryChange(country.value)}
             className={cn(
               "p-1 font-medium rounded-lg transition-colors",
@@ -110,29 +154,15 @@ export function TrademarkSearchFilter() {
         <Input
           label="상표명 검색"
           placeholder="상표명을 입력하세요"
-          value={localSearchText}
-          onChange={(e) => setLocalSearchText(e.target.value)}
-          onKeyPress={(e) => e.key === "Enter" && handleSearch()}
+          {...register("searchText")}
         />
         <Input
           label="출원번호 검색"
           placeholder="출원번호를 입력하세요"
-          value={localApplicationNumber}
-          onChange={(e) => setLocalApplicationNumber(e.target.value)}
-          onKeyPress={(e) => e.key === "Enter" && handleSearch()}
+          {...register("applicationNumber")}
         />
-        <Input
-          label="출원일 시작"
-          type="date"
-          value={localDateFrom}
-          onChange={(e) => setLocalDateFrom(e.target.value)}
-        />
-        <Input
-          label="출원일 종료"
-          type="date"
-          value={localDateTo}
-          onChange={(e) => setLocalDateTo(e.target.value)}
-        />
+        <Input label="출원일 시작" type="date" {...register("dateFrom")} />
+        <Input label="출원일 종료" type="date" {...register("dateTo")} />
       </div>
 
       {/* 상태 필터 */}
@@ -149,6 +179,7 @@ export function TrademarkSearchFilter() {
             return (
               <button
                 key={option.value}
+                type="button"
                 onClick={() => handleStatusToggle(option.value)}
                 className={cn(
                   "px-3 py-1 rounded-full text-sm font-medium transition-colors cursor-pointer",
@@ -166,11 +197,13 @@ export function TrademarkSearchFilter() {
 
       {/* 액션 버튼 */}
       <div className="flex justify-end space-x-2 pt-2">
-        <Button variant="outline" onClick={resetFilter}>
+        <Button type="button" variant="outline" onClick={handleReset}>
           초기화
         </Button>
-        <Button onClick={handleSearch}>검색</Button>
+        <Button type="submit" disabled={!isDirty}>
+          검색
+        </Button>
       </div>
-    </div>
+    </form>
   );
 }

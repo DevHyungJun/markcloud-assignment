@@ -7,7 +7,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
 }
 const BASE_STYLES =
-  "font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 cursor-pointer";
+  "font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 cursor-pointer disabled:opacity-50 disabled:cursor-default disabled:pointer-events-none";
 
 const VARIANT_STYLES = {
   primary: "bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500",
