@@ -1,7 +1,7 @@
-import { useFavorites } from '@/hooks/useFavorites';
-import { useTrademarkStore } from '@/stores/trademarkStore';
-import { TrademarkListItem } from './TrademarkListItem';
-import { EmptyState } from '@/components/common/EmptyState';
+import { useFavorites } from "@/hooks/useFavorites";
+import { useTrademarkStore } from "@/stores/trademarkStore";
+import { TrademarkListItem } from "./TrademarkListItem";
+import { EmptyState } from "@/components/common/EmptyState/EmptyState";
 
 export function FavoritesView() {
   const { favorites } = useFavorites();
@@ -36,4 +36,3 @@ export function FavoritesView() {
     </div>
   );
 }
-

@@ -3,9 +3,9 @@ import { useInView } from "react-intersection-observer";
 import { useTrademarks } from "@/hooks/useTrademarks";
 import { useTrademarkStore } from "@/stores/trademarkStore";
 import { TrademarkListItem } from "./TrademarkListItem";
-import { TrademarkSkeletonList } from "@/components/common/TrademarkSkeleton";
-import { EmptyState } from "@/components/common/EmptyState";
-import { ErrorMessage } from "@/components/common/ErrorMessage";
+import { TrademarkSkeletonList } from "@/components/common/TrademarkSkeleton/TrademarkSkeleton";
+import { EmptyState } from "@/components/common/EmptyState/EmptyState";
+import { ErrorMessage } from "@/components/common/ErrorMessage/ErrorMessage";
 
 export function TrademarkList() {
   const { data, isLoading, error, totalCount, hasMore, currentPage } =

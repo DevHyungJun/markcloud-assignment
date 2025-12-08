@@ -1,7 +1,9 @@
-export { Button } from './Button';
-export { Input } from './Input';
-export { TrademarkSkeleton, TrademarkSkeletonList } from './TrademarkSkeleton';
-export { EmptyState } from './EmptyState';
-export { ErrorMessage } from './ErrorMessage';
-export { Modal } from './Modal';
-
+export { Button } from "./Button/Button";
+export { Input } from "./Input/Input";
+export {
+  TrademarkSkeleton,
+  TrademarkSkeletonList,
+} from "./TrademarkSkeleton/TrademarkSkeleton";
+export { EmptyState } from "./EmptyState/EmptyState";
+export { ErrorMessage } from "./ErrorMessage/ErrorMessage";
+export { Modal } from "./Modal/Modal";
