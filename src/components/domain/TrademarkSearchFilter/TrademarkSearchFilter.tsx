@@ -103,14 +103,14 @@ export function TrademarkSearchFilter() {
       onSubmit={handleSubmit(onSubmit)}
       className="bg-white p-6 rounded-lg shadow-md space-y-4"
     >
-      <div className="flex space-x-2 border-b pb-4">
+      <div className="w-full flex space-x-1">
         {countryOptions.map((country) => (
           <button
             key={country.value}
             type="button"
             onClick={() => handleCountryChange(country.value)}
             className={cn(
-              "p-1 font-medium rounded-lg transition-colors",
+              "w-1/2 flex justify-center items-center p-1 font-medium rounded-lg transition-colors",
               selectedCountry === country.value
                 ? "bg-blue-600 text-white cursor-default"
                 : "bg-gray-100 text-gray-700 hover:bg-gray-200 cursor-pointer"
