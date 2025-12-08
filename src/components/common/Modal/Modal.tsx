@@ -1,6 +1,7 @@
 import { ReactNode, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { Button } from "../Button/Button";
+import { cn } from "@/utils";
 
 interface ModalProps {
   isOpen: boolean;
@@ -38,24 +39,28 @@ export function Modal({
   };
 
   return createPortal(
-    <div className="fixed inset-0 z-50 overflow-y-auto">
+    <div className="fixed inset-0 z-50">
       <div
         className="fixed inset-0 bg-black/50 backdrop-blur-sm"
         onClick={onClose}
         aria-hidden="true"
       />
-      <div className="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:p-0">
+      <div className="flex items-center justify-center min-h-screen px-4 py-4 text-center sm:p-0">
         <div
-          className={`relative inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle w-full ${sizeStyles[size]} z-10`}
+          className={cn(
+            "bg-white rounded-lg text-left overflow-hidden shadow-xl sm:my-8 sm:align-middle w-full flex flex-col max-h-[95dvh]",
+            sizeStyles[size],
+            "z-10 relative"
+          )}
           onClick={(e) => e.stopPropagation()}
         >
           {title && (
-            <div className="px-6 py-4 border-b border-gray-200">
+            <div className="px-6 py-4 border-b border-gray-200 shrink-0">
               <h3 className="text-lg font-semibold text-gray-900">{title}</h3>
             </div>
           )}
-          <div className="px-6 py-4">{children}</div>
-          <div className="px-6 py-4 border-t border-gray-200 flex justify-end">
+          <div className="px-6 py-4 scrollbar flex-1 min-h-0">{children}</div>
+          <div className="px-6 py-4 border-t border-gray-200 flex justify-end shrink-0">
             <Button
               onClick={onClose}
               variant="primary"
