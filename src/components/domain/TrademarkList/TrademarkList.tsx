@@ -61,8 +61,9 @@ export function TrademarkList() {
   return (
     <div className="space-y-4">
       <div className="flex justify-between items-center">
-        <p className="text-sm text-gray-600">
-          총 <span className="font-semibold">{totalCount}</span>개의 결과
+        <p className="text-gray-600">
+          총 <span className="font-semibold text-blue-500">{totalCount}</span>
+          개의 결과
         </p>
       </div>
 
