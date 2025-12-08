@@ -1,4 +1,4 @@
-import { NormalizedTrademark, TrademarkFilter } from '@/types/trademark';
+import { NormalizedTrademark, TrademarkFilter } from "@/types/trademark";
 
 export function filterTrademarks(
   trademarks: NormalizedTrademark[],
@@ -13,13 +13,11 @@ export function filterTrademarks(
     // 상표명 검색 (한국: 한글/영문 모두, 미국: 영문만)
     if (filter.searchText) {
       const searchLower = filter.searchText.toLowerCase();
-      const matchesDisplayName = trademark.displayName
-        .toLowerCase()
-        .includes(searchLower);
-      const matchesEnglishName = trademark.englishName
-        ?.toLowerCase()
-        .includes(searchLower);
-      
+      const matchesDisplayName =
+        trademark.displayName?.toLowerCase().includes(searchLower) ?? false;
+      const matchesEnglishName =
+        trademark.englishName?.toLowerCase().includes(searchLower) ?? false;
+
       if (!matchesDisplayName && !matchesEnglishName) {
         return false;
       }
@@ -42,13 +40,13 @@ export function filterTrademarks(
 
     // 날짜 범위 필터 (YYYYMMDD 형식 비교)
     if (filter.dateFrom) {
-      const dateFrom = filter.dateFrom.replace(/-/g, '');
+      const dateFrom = filter.dateFrom.replace(/-/g, "");
       if (trademark.applicationDate < dateFrom) {
         return false;
       }
     }
     if (filter.dateTo) {
-      const dateTo = filter.dateTo.replace(/-/g, '');
+      const dateTo = filter.dateTo.replace(/-/g, "");
       if (trademark.applicationDate > dateTo) {
         return false;
       }
@@ -57,4 +55,3 @@ export function filterTrademarks(
     return true;
   });
 }
-
