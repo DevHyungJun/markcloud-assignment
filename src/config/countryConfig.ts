@@ -1,6 +1,14 @@
-import { Country, TrademarkStatus, NormalizedTrademark } from "@/types/trademark/trademark";
-import { KrTrademarkRaw, UsTrademarkRaw } from "@/types/trademark/trademark";
-import { adaptKrTrademark, adaptUsTrademark } from "@/utils/adapters/trademarkAdapter";
+import {
+  Country,
+  TrademarkStatus,
+  NormalizedTrademark,
+  KrTrademarkRaw,
+  UsTrademarkRaw,
+} from "@/types/trademark/trademark";
+import {
+  adaptKrTrademark,
+  adaptUsTrademark,
+} from "@/utils/adapters/trademarkAdapter";
 
 // 국가별 상태 옵션 필터링 함수 타입
 type StatusFilterFn = (status: TrademarkStatus) => boolean;
@@ -124,4 +132,3 @@ export function getCountryAdapter(
 ): AdapterFn<KrTrademarkRaw | UsTrademarkRaw> {
   return COUNTRY_CONFIG[country].adapter;
 }
-
