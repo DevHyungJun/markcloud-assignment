@@ -1,5 +1,6 @@
 import { ReactNode, useEffect } from "react";
 import { createPortal } from "react-dom";
+import { Button } from "./Button";
 
 interface ModalProps {
   isOpen: boolean;
@@ -39,7 +40,7 @@ export function Modal({
   return createPortal(
     <div className="fixed inset-0 z-50 overflow-y-auto">
       <div
-        className="fixed inset-0 bg-black/50"
+        className="fixed inset-0 bg-black/50 backdrop-blur-sm"
         onClick={onClose}
         aria-hidden="true"
       />
@@ -55,12 +56,14 @@ export function Modal({
           )}
           <div className="px-6 py-4">{children}</div>
           <div className="px-6 py-4 border-t border-gray-200 flex justify-end">
-            <button
+            <Button
               onClick={onClose}
-              className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              variant="primary"
+              size="md"
+              className="w-full"
             >
               닫기
-            </button>
+            </Button>
           </div>
         </div>
       </div>
