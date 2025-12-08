@@ -1,22 +1,32 @@
-import { useState } from 'react';
-import { useTrademarkStore } from '@/stores/trademarkStore';
-import { TrademarkStatus, Country } from '@/types/trademark';
-import { Button, Input } from '@/components/common';
+import { useState } from "react";
+import { useTrademarkStore } from "@/stores/trademarkStore";
+import { TrademarkStatus, Country } from "@/types/trademark";
+import { Button, Input } from "@/components/common";
 
 const STATUS_OPTIONS: { value: TrademarkStatus; label: string }[] = [
-  { value: 'REGISTERED', label: '등록' },
-  { value: 'PENDING', label: '출원' },
-  { value: 'REJECTED', label: '거절' },
-  { value: 'DEAD', label: '실효' },
-  { value: 'LIVE', label: 'LIVE' },
+  { value: "REGISTERED", label: "등록" },
+  { value: "PENDING", label: "출원" },
+  { value: "REJECTED", label: "거절" },
+  { value: "DEAD", label: "실효" },
+  { value: "LIVE", label: "LIVE" },
 ];
 
 export function TrademarkSearchFilter() {
-  const { filter, setFilter, resetFilter, selectedCountry, setSelectedCountry } = useTrademarkStore();
-  const [localSearchText, setLocalSearchText] = useState(filter.searchText || '');
-  const [localApplicationNumber, setLocalApplicationNumber] = useState(filter.applicationNumber || '');
-  const [localDateFrom, setLocalDateFrom] = useState(filter.dateFrom || '');
-  const [localDateTo, setLocalDateTo] = useState(filter.dateTo || '');
+  const {
+    filter,
+    setFilter,
+    resetFilter,
+    selectedCountry,
+    setSelectedCountry,
+  } = useTrademarkStore();
+  const [localSearchText, setLocalSearchText] = useState(
+    filter.searchText || ""
+  );
+  const [localApplicationNumber, setLocalApplicationNumber] = useState(
+    filter.applicationNumber || ""
+  );
+  const [localDateFrom, setLocalDateFrom] = useState(filter.dateFrom || "");
+  const [localDateTo, setLocalDateTo] = useState(filter.dateTo || "");
 
   const handleSearch = () => {
     setFilter({
@@ -46,24 +56,32 @@ export function TrademarkSearchFilter() {
       {/* 국가 선택 탭 */}
       <div className="flex space-x-2 border-b pb-4">
         <button
-          onClick={() => handleCountryChange('KR')}
-          className={`px-4 py-2 font-medium rounded-lg transition-colors ${
-            selectedCountry === 'KR'
-              ? 'bg-blue-600 text-white'
-              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+          onClick={() => handleCountryChange("KR")}
+          className={`p-1 font-medium rounded-lg transition-colors ${
+            selectedCountry === "KR"
+              ? "bg-blue-600 text-white"
+              : "bg-gray-100 text-gray-700 hover:bg-gray-200"
           }`}
         >
-          한국
+          <img
+            src="https://img.icons8.com/?size=100&id=-_RS8ho736Fs&format=png&color=000000"
+            alt="한국"
+            className="w-15 h-15"
+          />
         </button>
         <button
-          onClick={() => handleCountryChange('US')}
-          className={`px-4 py-2 font-medium rounded-lg transition-colors ${
-            selectedCountry === 'US'
-              ? 'bg-blue-600 text-white'
-              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+          onClick={() => handleCountryChange("US")}
+          className={`p-1 font-medium rounded-lg transition-colors ${
+            selectedCountry === "US"
+              ? "bg-blue-600 text-white"
+              : "bg-gray-100 text-gray-700 hover:bg-gray-200"
           }`}
         >
-          미국
+          <img
+            src="https://img.icons8.com/?size=100&id=aRiu1GGi6Aoe&format=png&color=000000"
+            alt="미국"
+            className="w-15 h-15"
+          />
         </button>
       </div>
 
@@ -74,14 +92,14 @@ export function TrademarkSearchFilter() {
           placeholder="상표명을 입력하세요"
           value={localSearchText}
           onChange={(e) => setLocalSearchText(e.target.value)}
-          onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
+          onKeyPress={(e) => e.key === "Enter" && handleSearch()}
         />
         <Input
           label="출원번호 검색"
           placeholder="출원번호를 입력하세요"
           value={localApplicationNumber}
           onChange={(e) => setLocalApplicationNumber(e.target.value)}
-          onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
+          onKeyPress={(e) => e.key === "Enter" && handleSearch()}
         />
         <Input
           label="출원일 시작"
@@ -111,8 +129,8 @@ export function TrademarkSearchFilter() {
                 onClick={() => handleStatusToggle(option.value)}
                 className={`px-3 py-1 rounded-full text-sm font-medium transition-colors ${
                   isSelected
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    ? "bg-blue-600 text-white"
+                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                 }`}
               >
                 {option.label}
@@ -132,4 +150,3 @@ export function TrademarkSearchFilter() {
     </div>
   );
 }
-
