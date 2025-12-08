@@ -1,4 +1,4 @@
-import { NormalizedTrademark } from "@/types/trademark";
+import { NormalizedTrademark } from "@/types/trademark/trademark";
 import { useTrademarkStore } from "@/stores/trademarkStore";
 import { formatDate } from "@/utils";
 

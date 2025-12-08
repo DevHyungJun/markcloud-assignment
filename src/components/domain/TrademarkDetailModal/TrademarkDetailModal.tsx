@@ -1,5 +1,5 @@
 import { Modal } from "@/components/common";
-import { NormalizedTrademark } from "@/types/trademark";
+import { NormalizedTrademark } from "@/types/trademark/trademark";
 import { formatDate } from "@/utils";
 
 interface TrademarkDetailModalProps {

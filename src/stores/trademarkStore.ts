@@ -1,5 +1,9 @@
-import { create } from 'zustand';
-import { Country, TrademarkFilter, NormalizedTrademark } from '@/types/trademark';
+import { create } from "zustand";
+import {
+  Country,
+  TrademarkFilter,
+  NormalizedTrademark,
+} from "@/types/trademark/trademark";
 
 interface TrademarkStore {
   // 현재 선택된 국가
@@ -27,11 +31,11 @@ interface TrademarkStore {
 }
 
 const initialFilter: TrademarkFilter = {
-  country: 'KR',
+  country: "KR",
 };
 
 export const useTrademarkStore = create<TrademarkStore>((set, get) => ({
-  selectedCountry: 'KR',
+  selectedCountry: "KR",
   setSelectedCountry: (country) => {
     set({ selectedCountry: country, filter: { ...get().filter, country } });
   },
@@ -41,7 +45,10 @@ export const useTrademarkStore = create<TrademarkStore>((set, get) => ({
     set({ filter: { ...get().filter, ...newFilter }, page: 1 });
   },
   resetFilter: () => {
-    set({ filter: { ...initialFilter, country: get().selectedCountry }, page: 1 });
+    set({
+      filter: { ...initialFilter, country: get().selectedCountry },
+      page: 1,
+    });
   },
 
   favorites: new Set<string>(),
@@ -67,4 +74,3 @@ export const useTrademarkStore = create<TrademarkStore>((set, get) => ({
   setPage: (page) => set({ page }),
   resetPage: () => set({ page: 1 }),
 }));
-

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useTrademarkStore } from "@/stores/trademarkStore";
-import { TrademarkStatus, Country } from "@/types/trademark";
+import { TrademarkStatus, Country } from "@/types/trademark/trademark";
 import { Button, Input } from "@/components/common";
 import { cn } from "@/utils";
 

@@ -1,2 +1,1 @@
-export * from './trademark';
-
+export * from "./trademark/trademark";

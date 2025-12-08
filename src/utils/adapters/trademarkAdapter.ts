@@ -1,37 +1,37 @@
-import { 
-  NormalizedTrademark, 
-  KrTrademarkRaw, 
+import {
+  NormalizedTrademark,
+  KrTrademarkRaw,
   UsTrademarkRaw,
   TrademarkStatus,
-  Country 
-} from '@/types/trademark';
+  Country,
+} from "@/types/trademark/trademark";
 
 // 한국 상태를 공통 상태로 변환
 function normalizeKrStatus(status: string): TrademarkStatus {
   const statusMap: Record<string, TrademarkStatus> = {
-    '등록': 'REGISTERED',
-    '출원': 'PENDING',
-    '거절': 'REJECTED',
-    '실효': 'DEAD',
+    등록: "REGISTERED",
+    출원: "PENDING",
+    거절: "REJECTED",
+    실효: "DEAD",
   };
-  return statusMap[status] || 'PENDING';
+  return statusMap[status] || "PENDING";
 }
 
 // 미국 상태를 공통 상태로 변환
 function normalizeUsStatus(status: string): TrademarkStatus {
   const statusMap: Record<string, TrademarkStatus> = {
-    'LIVE': 'LIVE',
-    'DEAD': 'DEAD',
-    'PENDING': 'PENDING',
+    LIVE: "LIVE",
+    DEAD: "DEAD",
+    PENDING: "PENDING",
   };
-  return statusMap[status] || 'PENDING';
+  return statusMap[status] || "PENDING";
 }
 
 // 한국 데이터 어댑터
 export function adaptKrTrademark(raw: KrTrademarkRaw): NormalizedTrademark {
   return {
     id: raw.applicationNumber,
-    displayName: raw.productName || raw.productNameEng || '',
+    displayName: raw.productName || raw.productNameEng || "",
     englishName: raw.productNameEng,
     applicationNumber: raw.applicationNumber,
     applicationDate: raw.applicationDate,
@@ -47,7 +47,7 @@ export function adaptKrTrademark(raw: KrTrademarkRaw): NormalizedTrademark {
       subCodes: raw.asignProductSubCodeList || null,
       usClassCodes: null,
     },
-    country: 'KR',
+    country: "KR",
     raw,
   };
 }
@@ -72,7 +72,7 @@ export function adaptUsTrademark(raw: UsTrademarkRaw): NormalizedTrademark {
       subCodes: null,
       usClassCodes: raw.usClassCodeList || null,
     },
-    country: 'US',
+    country: "US",
     raw,
   };
 }
@@ -82,7 +82,7 @@ export function adaptTrademark(
   raw: KrTrademarkRaw | UsTrademarkRaw,
   country: Country
 ): NormalizedTrademark {
-  if (country === 'KR') {
+  if (country === "KR") {
     return adaptKrTrademark(raw as KrTrademarkRaw);
   }
   return adaptUsTrademark(raw as UsTrademarkRaw);
@@ -95,4 +95,3 @@ export function adaptTrademarks(
 ): NormalizedTrademark[] {
   return rawArray.map((raw) => adaptTrademark(raw, country));
 }
-

@@ -1,7 +1,7 @@
 import "./App.css";
-import QueryClientProvider from "./providers/QueryClientProvider";
+import { QueryClientProvider } from "@/providers";
 import { HomePage } from "@/pages";
-import TopScrollButton from "./components/common/TopScrollButton/TopScrollButton";
+import { TopScrollButton } from "@/components/common";
 
 function App() {
   return (

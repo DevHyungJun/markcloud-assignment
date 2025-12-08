@@ -1,4 +1,7 @@
-import { NormalizedTrademark, TrademarkFilter } from "@/types/trademark";
+import {
+  NormalizedTrademark,
+  TrademarkFilter,
+} from "@/types/trademark/trademark";
 
 export function filterTrademarks(
   trademarks: NormalizedTrademark[],

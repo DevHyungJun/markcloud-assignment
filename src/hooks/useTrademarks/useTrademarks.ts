@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useMemo, useState, useEffect } from "react";
-import { NormalizedTrademark, Country } from "@/types/trademark";
+import { NormalizedTrademark, Country } from "@/types/trademark/trademark";
 import { adaptTrademarks, filterTrademarks } from "@/utils";
 import { useTrademarkStore } from "@/stores/trademarkStore";
 import krData from "@/mockData/trademarks_kr_trademarks.json";

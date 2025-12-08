@@ -7,3 +7,4 @@ export {
 export { EmptyState } from "./EmptyState/EmptyState";
 export { ErrorMessage } from "./ErrorMessage/ErrorMessage";
 export { Modal } from "./Modal/Modal";
+export { default as TopScrollButton } from "./TopScrollButton/TopScrollButton";
