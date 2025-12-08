@@ -1,10 +1,6 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
-import {
-  Country,
-  TrademarkFilter,
-  NormalizedTrademark,
-} from "@/types/trademark/trademark";
+import { Country, TrademarkFilter } from "@/types/trademark/trademark";
 
 type SortOrder = "dateDesc" | "dateAsc";
 
