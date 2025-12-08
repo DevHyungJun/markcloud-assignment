@@ -8,7 +8,7 @@ import { EmptyState } from "@/components/common/EmptyState/EmptyState";
 import { ErrorMessage } from "@/components/common/ErrorMessage/ErrorMessage";
 
 export function TrademarkList() {
-  const { setSelectedTrademark, filter } = useTrademarkStore();
+  const { setSelectedTrademark, filter, resetFilter } = useTrademarkStore();
   const [page, setPage] = useState(1);
 
   // 필터가 변경되면 페이지 리셋
@@ -52,9 +52,7 @@ export function TrademarkList() {
             ? error.message
             : "데이터를 불러오는 중 오류가 발생했습니다."
         }
-        onRetry={() => {
-          refetch();
-        }}
+        onRetry={() => refetch()}
       />
     );
   }
@@ -64,6 +62,11 @@ export function TrademarkList() {
       <EmptyState
         title="검색 결과가 없습니다"
         description="다른 검색 조건으로 시도해보세요."
+        refetch={() => {
+          resetFilter();
+          setPage(1);
+          refetch();
+        }}
       />
     );
   }

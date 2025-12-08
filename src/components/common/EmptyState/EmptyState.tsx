@@ -1,14 +1,20 @@
-import { cn } from "@/utils";
 import { Button } from "../Button/Button";
 import { Link } from "react-router-dom";
+import { BUTTON_STYLES } from "./BUTTON_STYLES";
 
 interface EmptyStateProps {
   title: string;
   description?: string;
   icon?: React.ReactNode;
+  refetch?: () => void;
 }
 
-export function EmptyState({ title, description, icon }: EmptyStateProps) {
+export function EmptyState({
+  title,
+  description,
+  icon,
+  refetch,
+}: EmptyStateProps) {
   return (
     <div className="flex flex-col items-center justify-center py-12 px-4">
       {icon && <div className="mb-4 text-gray-400">{icon}</div>}
@@ -18,19 +24,26 @@ export function EmptyState({ title, description, icon }: EmptyStateProps) {
           {description}
         </p>
       )}
-      <Button
-        as={Link}
-        to="/"
-        replace
-        className={cn(
-          "relative flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md",
-          "hover:bg-gray-50",
-          "focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-        )}
-        aria-label="목록으로 이동"
-      >
-        목록으로 이동
-      </Button>
+      {refetch ? (
+        <Button
+          as="button"
+          onClick={refetch}
+          className={BUTTON_STYLES}
+          aria-label="다시 시도"
+        >
+          돌아가기
+        </Button>
+      ) : (
+        <Button
+          as={Link}
+          to="/"
+          replace
+          className={BUTTON_STYLES}
+          aria-label="목록으로 이동"
+        >
+          목록으로 이동
+        </Button>
+      )}
     </div>
   );
 }
