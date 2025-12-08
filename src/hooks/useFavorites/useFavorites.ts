@@ -1,16 +1,42 @@
 import { useMemo } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { useTrademarkStore } from "@/stores/trademarkStore";
-import { useTrademarks } from "../useTrademarks/useTrademarks";
+import { Country, NormalizedTrademark } from "@/types/trademark/trademark";
+import { adaptTrademarks } from "@/utils";
+import krData from "@/mockData/trademarks_kr_trademarks.json";
+import usData from "@/mockData/trademarks_us_trademarks.json";
+
+// 국가별 데이터 소스 맵
+const COUNTRY_DATA_SOURCES: Record<Country, any[]> = {
+  KR: krData,
+  US: usData,
+};
+
+// 모든 국가의 데이터를 가져오는 함수
+async function fetchAllTrademarks(): Promise<NormalizedTrademark[]> {
+  await new Promise((resolve) => setTimeout(resolve, 100));
+
+  const krTrademarks = adaptTrademarks(COUNTRY_DATA_SOURCES.KR as any[], "KR");
+  const usTrademarks = adaptTrademarks(COUNTRY_DATA_SOURCES.US as any[], "US");
+
+  return [...krTrademarks, ...usTrademarks];
+}
 
 export function useFavorites() {
   const { favorites, isFavorite } = useTrademarkStore();
-  const { allData } = useTrademarks(1);
+
+  // 모든 국가의 데이터를 가져옴
+  const { data: allTrademarks = [] } = useQuery({
+    queryKey: ["allTrademarks"],
+    queryFn: fetchAllTrademarks,
+    staleTime: 5 * 60 * 1000, // 5분
+  });
 
   const favoriteTrademarks = useMemo(() => {
-    return allData.filter((trademark) =>
+    return allTrademarks.filter((trademark) =>
       isFavorite(trademark.applicationNumber)
     );
-  }, [allData, favorites, isFavorite]);
+  }, [allTrademarks, favorites, isFavorite]);
 
   return {
     favorites: favoriteTrademarks,

@@ -2,7 +2,7 @@ import { NormalizedTrademark } from "@/types/trademark/trademark";
 import { useTrademarkStore } from "@/stores/trademarkStore";
 import { cn, formatDate } from "@/utils";
 import { Icon } from "@/components/common";
-import { shouldShowField } from "@/config/countryConfig";
+import { shouldShowField, getCountryMetadata } from "@/config/countryConfig";
 
 interface TrademarkListItemProps {
   trademark: NormalizedTrademark;
@@ -30,6 +30,7 @@ export function TrademarkListItem({
   onClick,
 }: TrademarkListItemProps) {
   const { isFavorite, toggleFavorite } = useTrademarkStore();
+  const countryMetadata = getCountryMetadata(trademark.country);
 
   const handleFavoriteClick = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -44,6 +45,11 @@ export function TrademarkListItem({
       <div className="flex items-start justify-between">
         <div className="flex-1">
           <div className="flex items-center gap-2 mb-2">
+            <img
+              src={countryMetadata.flagUrl}
+              alt={countryMetadata.flagAlt}
+              className="w-5 h-5 object-contain"
+            />
             <h3 className="text-lg font-semibold text-gray-900">
               {trademark.displayName}
             </h3>

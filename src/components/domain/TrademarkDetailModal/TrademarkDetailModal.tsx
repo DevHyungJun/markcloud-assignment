@@ -1,7 +1,7 @@
 import { Modal } from "@/components/common";
 import { NormalizedTrademark } from "@/types/trademark/trademark";
 import { formatDate } from "@/utils";
-import { shouldShowField } from "@/config/countryConfig";
+import { shouldShowField, getCountryMetadata } from "@/config/countryConfig";
 
 interface TrademarkDetailModalProps {
   trademark: NormalizedTrademark | null;
@@ -22,6 +22,8 @@ export function TrademarkDetailModal({
 }: TrademarkDetailModalProps) {
   if (!trademark) return null;
 
+  const countryMetadata = getCountryMetadata(trademark.country);
+
   return (
     <Modal
       isOpen={!!trademark}
@@ -36,6 +38,21 @@ export function TrademarkDetailModal({
             기본 정보
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-500">
+                국가
+              </label>
+              <div className="mt-1 flex items-center gap-2">
+                <img
+                  src={countryMetadata.flagUrl}
+                  alt={countryMetadata.flagAlt}
+                  className="w-5 h-5 object-contain"
+                />
+                <span className="text-base text-gray-900">
+                  {countryMetadata.label}
+                </span>
+              </div>
+            </div>
             <div>
               <label className="block text-sm font-medium text-gray-500">
                 상표명
