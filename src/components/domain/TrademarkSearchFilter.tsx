@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useTrademarkStore } from "@/stores/trademarkStore";
 import { TrademarkStatus, Country } from "@/types/trademark";
 import { Button, Input } from "@/components/common";
+import { cn } from "@/utils/cn/cn";
 
 const STATUS_OPTIONS: { value: TrademarkStatus; label: string }[] = [
   { value: "REGISTERED", label: "등록" },
@@ -18,6 +19,28 @@ const KR_STATUS_OPTIONS = STATUS_OPTIONS.filter(
 const US_STATUS_OPTIONS = STATUS_OPTIONS.filter(
   (option) => option.value === "DEAD" || option.value === "LIVE"
 );
+
+const COUNTRY_OPTIONS: {
+  value: Country;
+  label: string;
+  flagUrl: string;
+  flagAlt: string;
+}[] = [
+  {
+    value: "KR",
+    label: "한국",
+    flagUrl:
+      "https://img.icons8.com/?size=100&id=-_RS8ho736Fs&format=png&color=000000",
+    flagAlt: "한국",
+  },
+  {
+    value: "US",
+    label: "미국",
+    flagUrl:
+      "https://img.icons8.com/?size=100&id=aRiu1GGi6Aoe&format=png&color=000000",
+    flagAlt: "미국",
+  },
+];
 
 export function TrademarkSearchFilter() {
   const {
@@ -61,36 +84,25 @@ export function TrademarkSearchFilter() {
 
   return (
     <div className="bg-white p-6 rounded-lg shadow-md space-y-4">
-      {/* 국가 선택 탭 */}
       <div className="flex space-x-2 border-b pb-4">
-        <button
-          onClick={() => handleCountryChange("KR")}
-          className={`p-1 font-medium rounded-lg transition-colors ${
-            selectedCountry === "KR"
-              ? "bg-blue-600 text-white"
-              : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-          }`}
-        >
-          <img
-            src="https://img.icons8.com/?size=100&id=-_RS8ho736Fs&format=png&color=000000"
-            alt="한국"
-            className="w-15 h-15"
-          />
-        </button>
-        <button
-          onClick={() => handleCountryChange("US")}
-          className={`p-1 font-medium rounded-lg transition-colors ${
-            selectedCountry === "US"
-              ? "bg-blue-600 text-white"
-              : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-          }`}
-        >
-          <img
-            src="https://img.icons8.com/?size=100&id=aRiu1GGi6Aoe&format=png&color=000000"
-            alt="미국"
-            className="w-15 h-15"
-          />
-        </button>
+        {COUNTRY_OPTIONS.map((country) => (
+          <button
+            key={country.value}
+            onClick={() => handleCountryChange(country.value)}
+            className={cn(
+              "p-1 font-medium rounded-lg transition-colors",
+              selectedCountry === country.value
+                ? "bg-blue-600 text-white cursor-default"
+                : "bg-gray-100 text-gray-700 hover:bg-gray-200 cursor-pointer"
+            )}
+          >
+            <img
+              src={country.flagUrl}
+              alt={country.flagAlt}
+              className="w-15 h-15"
+            />
+          </button>
+        ))}
       </div>
 
       {/* 검색 필드 */}
@@ -138,11 +150,12 @@ export function TrademarkSearchFilter() {
               <button
                 key={option.value}
                 onClick={() => handleStatusToggle(option.value)}
-                className={`px-3 py-1 rounded-full text-sm font-medium transition-colors ${
+                className={cn(
+                  "px-3 py-1 rounded-full text-sm font-medium transition-colors cursor-pointer",
                   isSelected
                     ? "bg-blue-600 text-white"
                     : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                }`}
+                )}
               >
                 {option.label}
               </button>
