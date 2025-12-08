@@ -7,7 +7,7 @@ export function ErrorMessage({ message, onRetry }: ErrorMessageProps) {
   return (
     <div className="bg-red-50 border border-red-200 rounded-lg p-4">
       <div className="flex items-start">
-        <div className="flex-shrink-0">
+        <div className="shrink-0">
           <svg
             className="h-5 w-5 text-red-400"
             viewBox="0 0 20 20"
@@ -21,7 +21,9 @@ export function ErrorMessage({ message, onRetry }: ErrorMessageProps) {
           </svg>
         </div>
         <div className="ml-3 flex-1">
-          <h3 className="text-sm font-medium text-red-800">오류가 발생했습니다</h3>
+          <h3 className="text-sm font-medium text-red-800">
+            오류가 발생했습니다
+          </h3>
           <p className="mt-1 text-sm text-red-700">{message}</p>
           {onRetry && (
             <button
@@ -36,4 +38,3 @@ export function ErrorMessage({ message, onRetry }: ErrorMessageProps) {
     </div>
   );
 }
-
