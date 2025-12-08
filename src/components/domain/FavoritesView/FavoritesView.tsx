@@ -1,11 +1,14 @@
+import { useState } from "react";
 import { useFavorites } from "@/hooks";
-import { useTrademarkStore } from "@/stores/trademarkStore";
+import { NormalizedTrademark } from "@/types/trademark/trademark";
 import { TrademarkListItem } from "../TrademarkListItem/TrademarkListItem";
+import { TrademarkDetailModal } from "../TrademarkDetailModal/TrademarkDetailModal";
 import { EmptyState } from "@/components/common";
 
 export function FavoritesView() {
   const { favorites } = useFavorites();
-  const { setSelectedTrademark } = useTrademarkStore();
+  const [selectedTrademark, setSelectedTrademark] =
+    useState<NormalizedTrademark | null>(null);
 
   if (favorites.length === 0) {
     return (
@@ -33,6 +36,11 @@ export function FavoritesView() {
           />
         ))}
       </div>
+
+      <TrademarkDetailModal
+        trademark={selectedTrademark}
+        onClose={() => setSelectedTrademark(null)}
+      />
     </div>
   );
 }

@@ -2,14 +2,18 @@ import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { useTrademarks } from "@/hooks/useTrademarks/useTrademarks";
 import { useTrademarkStore } from "@/stores/trademarkStore";
+import { NormalizedTrademark } from "@/types/trademark/trademark";
 import { TrademarkListItem } from "../TrademarkListItem/TrademarkListItem";
+import { TrademarkDetailModal } from "../TrademarkDetailModal/TrademarkDetailModal";
 import { TrademarkSkeletonList } from "@/components/common/TrademarkSkeleton/TrademarkSkeleton";
 import { EmptyState } from "@/components/common/EmptyState/EmptyState";
 import { ErrorMessage } from "@/components/common/ErrorMessage/ErrorMessage";
 
 export function TrademarkList() {
-  const { setSelectedTrademark, filter, resetFilter } = useTrademarkStore();
+  const { filter, resetFilter } = useTrademarkStore();
   const [page, setPage] = useState(1);
+  const [selectedTrademark, setSelectedTrademark] =
+    useState<NormalizedTrademark | null>(null);
 
   // 필터가 변경되면 페이지 리셋
   useEffect(() => {
@@ -93,6 +97,11 @@ export function TrademarkList() {
       {isLoadingMore && <TrademarkSkeletonList count={3} />}
 
       {hasMore && !isLoading && <div ref={ref} className="h-10" />}
+
+      <TrademarkDetailModal
+        trademark={selectedTrademark}
+        onClose={() => setSelectedTrademark(null)}
+      />
     </div>
   );
 }

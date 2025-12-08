@@ -26,10 +26,6 @@ interface TrademarkStore {
   favorites: Set<string>; // applicationNumber Set
   toggleFavorite: (applicationNumber: string) => void;
   isFavorite: (applicationNumber: string) => boolean;
-
-  // 선택된 상표 (상세 보기용)
-  selectedTrademark: NormalizedTrademark | null;
-  setSelectedTrademark: (trademark: NormalizedTrademark | null) => void;
 }
 
 const initialFilter: TrademarkFilter = {
@@ -71,11 +67,6 @@ export const useTrademarkStore = create<TrademarkStore>()(
       },
       isFavorite: (applicationNumber) => {
         return get().favorites.has(applicationNumber);
-      },
-
-      selectedTrademark: null,
-      setSelectedTrademark: (trademark) => {
-        set({ selectedTrademark: trademark });
       },
     }),
     {
