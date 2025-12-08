@@ -1,3 +1,4 @@
+import { cn } from "@/utils";
 import { Icon } from "../Icon/Icon";
 
 interface ErrorMessageProps {
@@ -20,7 +21,10 @@ export function ErrorMessage({ message, onRetry }: ErrorMessageProps) {
           {onRetry && (
             <button
               onClick={onRetry}
-              className="mt-3 text-sm font-medium text-red-800 cursor-pointer hover:text-red-900 underline"
+              className={cn(
+                "mt-3 text-sm font-medium text-red-800 cursor-pointer underline",
+                "hover:text-red-900"
+              )}
             >
               다시 시도
             </button>

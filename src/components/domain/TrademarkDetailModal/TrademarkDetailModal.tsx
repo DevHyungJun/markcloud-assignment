@@ -2,19 +2,12 @@ import { Modal } from "@/components/common";
 import { NormalizedTrademark } from "@/types/trademark/trademark";
 import { formatDate } from "@/utils";
 import { shouldShowField, getCountryMetadata } from "@/config/countryConfig";
+import { STATUS_LABELS } from "@/constants/STATUS_LABELS";
 
 interface TrademarkDetailModalProps {
   trademark: NormalizedTrademark | null;
   onClose: () => void;
 }
-
-const STATUS_LABELS: Record<string, string> = {
-  REGISTERED: "등록",
-  PENDING: "출원",
-  REJECTED: "거절",
-  DEAD: "실효",
-  LIVE: "LIVE",
-};
 
 export function TrademarkDetailModal({
   trademark,
@@ -97,32 +90,32 @@ export function TrademarkDetailModal({
         {/* 공고 정보 */}
         {shouldShowField(trademark.country, "publicationNumber") &&
           trademark.publicationNumber && (
-          <section>
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">
-              공고 정보
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-500">
-                  공고번호
-                </label>
-                <p className="mt-1 text-base text-gray-900">
-                  {trademark.publicationNumber}
-                </p>
-              </div>
-              {trademark.publicationDate && (
+            <section>
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                공고 정보
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-500">
-                    공고일
+                    공고번호
                   </label>
                   <p className="mt-1 text-base text-gray-900">
-                    {formatDate(trademark.publicationDate)}
+                    {trademark.publicationNumber}
                   </p>
                 </div>
-              )}
-            </div>
-          </section>
-        )}
+                {trademark.publicationDate && (
+                  <div>
+                    <label className="block text-sm font-medium text-gray-500">
+                      공고일
+                    </label>
+                    <p className="mt-1 text-base text-gray-900">
+                      {formatDate(trademark.publicationDate)}
+                    </p>
+                  </div>
+                )}
+              </div>
+            </section>
+          )}
 
         {/* 등록 정보 */}
         {trademark.registrationNumber &&
@@ -151,10 +144,7 @@ export function TrademarkDetailModal({
                       </p>
                     </div>
                   )}
-                {shouldShowField(
-                  trademark.country,
-                  "registrationPubNumber"
-                ) &&
+                {shouldShowField(trademark.country, "registrationPubNumber") &&
                   trademark.registrationPubNumber && (
                     <div>
                       <label className="block text-sm font-medium text-gray-500">
@@ -165,10 +155,7 @@ export function TrademarkDetailModal({
                       </p>
                     </div>
                   )}
-                {shouldShowField(
-                  trademark.country,
-                  "registrationPubDate"
-                ) &&
+                {shouldShowField(trademark.country, "registrationPubDate") &&
                   trademark.registrationPubDate && (
                     <div>
                       <label className="block text-sm font-medium text-gray-500">
@@ -199,15 +186,15 @@ export function TrademarkDetailModal({
             </div>
             {shouldShowField(trademark.country, "subCodes") &&
               trademark.productCodes.subCodes && (
-              <div>
-                <label className="block text-sm font-medium text-gray-500">
-                  유사군 코드
-                </label>
-                <p className="mt-1 text-base text-gray-900">
-                  {trademark.productCodes.subCodes.join(", ")}
-                </p>
-              </div>
-            )}
+                <div>
+                  <label className="block text-sm font-medium text-gray-500">
+                    유사군 코드
+                  </label>
+                  <p className="mt-1 text-base text-gray-900">
+                    {trademark.productCodes.subCodes.join(", ")}
+                  </p>
+                </div>
+              )}
             {shouldShowField(trademark.country, "usClassCodes") &&
               trademark.productCodes.usClassCodes && (
                 <div>

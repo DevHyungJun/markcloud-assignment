@@ -1,16 +1,9 @@
 import { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useTrademarkStore } from "@/stores/trademarkStore";
-import { Country, NormalizedTrademark } from "@/types/trademark/trademark";
+import { NormalizedTrademark } from "@/types/trademark/trademark";
 import { adaptTrademarks } from "@/utils";
-import krData from "@/mockData/trademarks_kr_trademarks.json";
-import usData from "@/mockData/trademarks_us_trademarks.json";
-
-// 국가별 데이터 소스 맵
-const COUNTRY_DATA_SOURCES: Record<Country, any[]> = {
-  KR: krData,
-  US: usData,
-};
+import { COUNTRY_DATA_SOURCES } from "@/constants/COUNTRY_DATA_SOURCES";
 
 // 모든 국가의 데이터를 가져오는 함수
 async function fetchAllTrademarks(): Promise<NormalizedTrademark[]> {

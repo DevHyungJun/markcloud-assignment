@@ -1,3 +1,4 @@
+import { cn } from "@/utils";
 import { useState, useEffect } from "react";
 
 const SCROLL_THRESHOLD = 300;
@@ -32,7 +33,10 @@ const TopScrollButton = () => {
   return (
     <button
       onClick={handleClick}
-      className="fixed bottom-5 right-5 bg-sky-400 text-white p-1 rounded-full shadow-lg hover:bg-sky-700 transition-all duration-300 w-12 h-12 flex items-center justify-center z-40"
+      className={cn(
+        "fixed bottom-5 right-5 bg-sky-400 text-white p-1 rounded-full shadow-lg transition-all duration-300 w-12 h-12 flex items-center justify-center z-40",
+        "hover:bg-sky-700"
+      )}
       aria-label="맨 위로 스크롤"
     >
       TOP

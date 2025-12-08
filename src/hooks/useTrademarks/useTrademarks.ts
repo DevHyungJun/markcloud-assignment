@@ -3,16 +3,9 @@ import { useMemo, useState, useEffect } from "react";
 import { NormalizedTrademark, Country } from "@/types/trademark/trademark";
 import { adaptTrademarks, filterTrademarks } from "@/utils";
 import { useTrademarkStore } from "@/stores/trademarkStore";
-import krData from "@/mockData/trademarks_kr_trademarks.json";
-import usData from "@/mockData/trademarks_us_trademarks.json";
+import { COUNTRY_DATA_SOURCES } from "@/constants/COUNTRY_DATA_SOURCES";
 
 const ITEMS_PER_PAGE = 10; // 페이지당 아이템 수를 줄여서 점진적 로딩 효과
-
-// 국가별 데이터 소스 맵 (추후 확장 가능)
-const COUNTRY_DATA_SOURCES: Record<Country, any[]> = {
-  KR: krData,
-  US: usData,
-};
 
 // Mock API 함수 (설정 기반)
 async function fetchTrademarks(

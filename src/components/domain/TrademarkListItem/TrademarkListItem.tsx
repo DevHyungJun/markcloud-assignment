@@ -3,27 +3,13 @@ import { useTrademarkStore } from "@/stores/trademarkStore";
 import { cn, formatDate } from "@/utils";
 import { Icon } from "@/components/common";
 import { shouldShowField, getCountryMetadata } from "@/config/countryConfig";
+import { STATUS_LABELS } from "@/constants/STATUS_LABELS";
+import { STATUS_COLORS } from "./STATUS_COLORS";
 
 interface TrademarkListItemProps {
   trademark: NormalizedTrademark;
   onClick: () => void;
 }
-
-const STATUS_LABELS: Record<string, string> = {
-  REGISTERED: "등록",
-  PENDING: "출원",
-  REJECTED: "거절",
-  DEAD: "실효",
-  LIVE: "LIVE",
-};
-
-const STATUS_COLORS: Record<string, string> = {
-  REGISTERED: "bg-green-100 text-green-800",
-  PENDING: "bg-yellow-100 text-yellow-800",
-  REJECTED: "bg-red-100 text-red-800",
-  DEAD: "bg-gray-100 text-gray-800",
-  LIVE: "bg-blue-100 text-blue-800",
-};
 
 export function TrademarkListItem({
   trademark,
@@ -60,9 +46,10 @@ export function TrademarkListItem({
                 </span>
               )}
             <span
-              className={`px-2 py-1 rounded-full text-xs font-medium ${
+              className={cn(
+                "px-2 py-1 rounded-full text-xs font-medium",
                 STATUS_COLORS[trademark.status]
-              }`}
+              )}
             >
               {STATUS_LABELS[trademark.status]}
             </span>

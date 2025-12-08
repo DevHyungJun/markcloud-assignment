@@ -2,6 +2,7 @@ import { ReactNode, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { Button } from "../Button/Button";
 import { cn } from "@/utils";
+import { SIZE_STYLES } from "./MODAL_STYLES";
 
 interface ModalProps {
   isOpen: boolean;
@@ -31,13 +32,6 @@ export function Modal({
 
   if (!isOpen) return null;
 
-  const sizeStyles = {
-    sm: "max-w-md",
-    md: "max-w-2xl",
-    lg: "max-w-4xl",
-    xl: "max-w-6xl",
-  };
-
   return createPortal(
     <div className="fixed inset-0 z-50">
       <div
@@ -49,7 +43,7 @@ export function Modal({
         <div
           className={cn(
             "bg-white rounded-lg text-left overflow-hidden shadow-xl sm:my-8 sm:align-middle w-full flex flex-col max-h-[95dvh]",
-            sizeStyles[size],
+            SIZE_STYLES[size],
             "z-10 relative"
           )}
           onClick={(e) => e.stopPropagation()}
