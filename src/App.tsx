@@ -1,6 +1,6 @@
 import "./App.css";
 import QueryClientProvider from "./providers/QueryClientProvider";
-import { HomePage } from "./pages/HomePage";
+import { HomePage } from "@/pages";
 import TopScrollButton from "./components/common/TopScrollButton/TopScrollButton";
 
 function App() {
