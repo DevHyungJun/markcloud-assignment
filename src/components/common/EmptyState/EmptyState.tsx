@@ -18,17 +18,19 @@ export function EmptyState({ title, description, icon }: EmptyStateProps) {
           {description}
         </p>
       )}
-      <Link to="/" replace className="mt-4">
-        <Button
-          className={cn(
-            "relative flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md",
-            "hover:bg-gray-50",
-            "focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-          )}
-        >
-          목록으로 이동
-        </Button>
-      </Link>
+      <Button
+        as={Link}
+        to="/"
+        replace
+        className={cn(
+          "relative flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md",
+          "hover:bg-gray-50",
+          "focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+        )}
+        aria-label="목록으로 이동"
+      >
+        목록으로 이동
+      </Button>
     </div>
   );
 }
