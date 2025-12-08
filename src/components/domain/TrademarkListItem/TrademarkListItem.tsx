@@ -2,7 +2,7 @@ import { NormalizedTrademark } from "@/types/trademark/trademark";
 import { useTrademarkStore } from "@/stores/trademarkStore";
 import { cn, formatDate } from "@/utils";
 import { Icon } from "@/components/common";
-import { shouldShowField, getCountryMetadata } from "@/config/countryConfig";
+import { getCountryMetadata } from "@/config/countryConfig";
 import { STATUS_LABELS } from "@/constants/STATUS_LABELS";
 import { STATUS_COLORS } from "./STATUS_COLORS";
 
@@ -36,7 +36,7 @@ export function TrademarkListItem({
               alt={countryMetadata.flagAlt}
               className="w-5 h-5 object-contain"
             />
-            <h3 className="text-lg font-semibold text-gray-900">
+            <h3 className="text-lg font-semibold text-gray-900 line-clamp-1">
               {trademark.displayName}
             </h3>
             {trademark.englishName &&
@@ -47,7 +47,7 @@ export function TrademarkListItem({
               )}
             <span
               className={cn(
-                "px-2 py-1 rounded-full text-xs font-medium",
+                "px-2 py-1 rounded-full text-xs font-medium text-nowrap",
                 STATUS_COLORS[trademark.status]
               )}
             >
@@ -55,37 +55,19 @@ export function TrademarkListItem({
             </span>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 text-sm text-gray-600">
+          <div className="flex flex-col gap-2 text-sm text-gray-600">
             <div>
-              <span className="font-medium">출원번호:</span>{" "}
-              <span className="text-gray-900">
+              <span className="text-gray-500">출원번호: </span>
+              <span className="text-gray-900 font-medium">
                 {trademark.applicationNumber}
               </span>
             </div>
             <div>
-              <span className="font-medium">출원일:</span>{" "}
-              <span className="text-gray-900">
+              <span className="text-gray-500">출원일: </span>
+              <span className="text-gray-900 font-medium">
                 {formatDate(trademark.applicationDate)}
               </span>
             </div>
-            {shouldShowField(trademark.country, "publicationNumber") &&
-              trademark.publicationNumber && (
-                <div>
-                  <span className="font-medium">공고번호:</span>{" "}
-                  <span className="text-gray-900">
-                    {trademark.publicationNumber}
-                  </span>
-                </div>
-              )}
-            {trademark.registrationNumber &&
-              trademark.registrationNumber.length > 0 && (
-                <div>
-                  <span className="font-medium">등록번호:</span>{" "}
-                  <span className="text-gray-900">
-                    {trademark.registrationNumber[0]}
-                  </span>
-                </div>
-              )}
           </div>
         </div>
 
