@@ -15,6 +15,7 @@ import { StatusDistributionChart } from "@/components/domain/Statistics/StatusDi
 import { YearlyTrendChart } from "@/components/domain/Statistics/YearlyTrendChart";
 import { ProductCategoryChart } from "@/components/domain/Statistics/ProductCategoryChart";
 import { RegistrationDurationChart } from "@/components/domain/Statistics/RegistrationDurationChart";
+import StatisticsSkeleton from "@/components/domain/Statistics/statisticsSkeleton";
 
 // 국가별 데이터 가져오기
 async function fetchTrademarksByCountry(
@@ -77,16 +78,6 @@ export function StatisticsPage() {
   const isLoading = countryQueries.some((query) => query.isLoading);
   const hasError = countryQueries.some((query) => query.error);
 
-  if (isLoading) {
-    return (
-      <MainLayout>
-        <div className="flex items-center justify-center h-64">
-          <p className="text-gray-600">데이터를 불러오는 중...</p>
-        </div>
-      </MainLayout>
-    );
-  }
-
   if (hasError) {
     return (
       <MainLayout>
@@ -122,20 +113,28 @@ export function StatisticsPage() {
               : "상표 데이터를 비교 분석합니다."}
           </p>
         </div>
-
-        <StatusDistributionChart
-          data={statusData}
-          countries={availableCountries}
-        />
-        <YearlyTrendChart data={yearlyData} countries={availableCountries} />
-        <ProductCategoryChart
-          data={categoryData}
-          countries={availableCountries}
-        />
-        <RegistrationDurationChart
-          data={durationData}
-          countries={availableCountries}
-        />
+        {isLoading ? (
+          <StatisticsSkeleton />
+        ) : (
+          <>
+            <StatusDistributionChart
+              data={statusData}
+              countries={availableCountries}
+            />
+            <YearlyTrendChart
+              data={yearlyData}
+              countries={availableCountries}
+            />
+            <ProductCategoryChart
+              data={categoryData}
+              countries={availableCountries}
+            />
+            <RegistrationDurationChart
+              data={durationData}
+              countries={availableCountries}
+            />
+          </>
+        )}
       </div>
     </MainLayout>
   );
