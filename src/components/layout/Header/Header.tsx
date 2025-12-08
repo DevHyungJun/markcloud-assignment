@@ -6,6 +6,7 @@ import { cn } from "@/utils";
 export function Header() {
   const { count } = useFavorites();
   const location = useLocation();
+
   const isFavoritesPage = location.pathname === "/favorites";
   const isStatisticsPage = location.pathname === "/statistics";
 
