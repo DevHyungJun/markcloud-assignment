@@ -129,7 +129,7 @@ export function Header() {
               "animate-[slideInFromRight_0.3s_ease-out]"
             )}
           >
-            <div className="flex flex-col h-full">
+            <div className="flex flex-col h-dvh">
               {/* 메뉴 헤더 */}
               <div className="flex items-center justify-end p-2 sm:p-4">
                 <button

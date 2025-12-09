@@ -39,7 +39,7 @@ export function Modal({
         onClick={onClose}
         aria-hidden="true"
       />
-      <div className="flex items-center justify-center min-h-screen px-4 py-4 text-center sm:p-0">
+      <div className="flex items-center justify-center min-h-dvh px-4 py-4 text-center sm:p-0">
         <div
           className={cn(
             "bg-white rounded-lg text-left overflow-hidden shadow-xl sm:my-8 sm:align-middle w-full flex flex-col max-h-[95dvh]",
