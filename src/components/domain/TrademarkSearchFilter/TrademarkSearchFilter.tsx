@@ -27,44 +27,60 @@ export function TrademarkSearchFilter() {
     setSortOrder,
   } = useTrademarkStore();
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    watch,
-    formState: { isDirty },
-  } = useForm<SearchFormData>({
+  const { register, handleSubmit, watch, setValue } = useForm<SearchFormData>({
     defaultValues: {
-      searchText: filter.searchText || "",
-      applicationNumber: filter.applicationNumber || "",
-      dateFrom: filter.dateFrom || "",
-      dateTo: filter.dateTo || "",
+      searchText: "",
+      applicationNumber: "",
+      dateFrom: "",
+      dateTo: "",
     },
   });
   const wSearchText = watch("searchText");
   const wApplicationNumber = watch("applicationNumber");
-  const isInvalid =
-    wSearchText.trim() === "" && wApplicationNumber.trim() === "";
+  const wDateFrom = watch("dateFrom");
+  const wDateTo = watch("dateTo");
 
-  // 필터가 외부에서 변경될 때 폼 값 동기화
+  // form 데이터 중 하나라도 값이 있으면 활성화
+  const hasAnyFormValue =
+    wSearchText.trim() !== "" ||
+    wApplicationNumber.trim() !== "" ||
+    wDateFrom !== "" ||
+    wDateTo !== "";
+
+  // store의 상태 필터도 확인
+  const hasStatusFilter = filter.status && filter.status.length > 0;
+
+  // form 값 또는 상태 필터 중 하나라도 있으면 활성화
+  const hasAnyValue = hasAnyFormValue || hasStatusFilter;
+
+  // 초기 마운트 시에만 filter 값으로 form 동기화
+  const isInitialMount = useRef(true);
   useEffect(() => {
-    reset({
-      searchText: filter.searchText || "",
-      applicationNumber: filter.applicationNumber || "",
-      dateFrom: filter.dateFrom || "",
-      dateTo: filter.dateTo || "",
-    });
+    if (
+      isInitialMount.current &&
+      (filter.searchText ||
+        filter.applicationNumber ||
+        filter.dateFrom ||
+        filter.dateTo)
+    ) {
+      setValue("searchText", filter.searchText || "");
+      setValue("applicationNumber", filter.applicationNumber || "");
+      setValue("dateFrom", filter.dateFrom || "");
+      setValue("dateTo", filter.dateTo || "");
+      isInitialMount.current = false;
+    } else if (isInitialMount.current) {
+      isInitialMount.current = false;
+    }
   }, [
     filter.searchText,
     filter.applicationNumber,
     filter.dateFrom,
     filter.dateTo,
-    reset,
+    setValue,
   ]);
 
   const onSubmit = (data: SearchFormData) => {
     const { searchText, applicationNumber, dateFrom, dateTo } = data;
-    if (isInvalid) return;
     setFilter({
       searchText: searchText || undefined,
       applicationNumber: applicationNumber || undefined,
@@ -75,13 +91,30 @@ export function TrademarkSearchFilter() {
   };
 
   const handleReset = () => {
-    reset({
-      searchText: "",
-      applicationNumber: "",
-      dateFrom: "",
-      dateTo: "",
+    // form 필드들을 직접 초기화 (watch()가 즉시 업데이트되도록)
+    setValue("searchText", "", {
+      shouldDirty: false,
+      shouldTouch: false,
+      shouldValidate: false,
     });
+    setValue("applicationNumber", "", {
+      shouldDirty: false,
+      shouldTouch: false,
+      shouldValidate: false,
+    });
+    setValue("dateFrom", "", {
+      shouldDirty: false,
+      shouldTouch: false,
+      shouldValidate: false,
+    });
+    setValue("dateTo", "", {
+      shouldDirty: false,
+      shouldTouch: false,
+      shouldValidate: false,
+    });
+    // store 필터 초기화
     resetFilter();
+    setFilter({ status: undefined });
   };
 
   const handleStatusToggle = (status: TrademarkStatus) => {
@@ -265,11 +298,11 @@ export function TrademarkSearchFilter() {
           type="button"
           variant="outline"
           onClick={handleReset}
-          disabled={!isDirty || isInvalid}
+          disabled={!hasAnyValue}
         >
           초기화
         </Button>
-        <Button type="submit" disabled={!isDirty || isInvalid}>
+        <Button type="submit" disabled={!hasAnyValue}>
           검색
         </Button>
       </div>
