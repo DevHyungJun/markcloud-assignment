@@ -30,6 +30,27 @@ type ButtonProps =
   | ButtonPropsAsLink
   | ButtonPropsAsAnchor;
 
+/**
+ * 다형성 Button 컴포넌트
+ *
+ * @remarks
+ * `as` prop을 통해 button, Link, anchor 태그로 렌더링할 수 있습니다.
+ *
+ * @example
+ * ```tsx
+ * // 기본 button 태그
+ * <Button variant="primary" size="md">클릭</Button>
+ *
+ * // Link 컴포넌트로 렌더링
+ * <Button as={Link} to="/home">홈으로</Button>
+ *
+ * // anchor 태그로 렌더링
+ * <Button as="a" href="https://example.com">외부 링크</Button>
+ * ```
+ *
+ * @param props - Button 컴포넌트의 props
+ * @returns 렌더링된 버튼 요소
+ */
 export function Button({
   variant = "primary",
   size = "md",
@@ -45,7 +66,6 @@ export function Button({
     className
   );
 
-  // Link 컴포넌트로 렌더링
   if (as === Link) {
     const { to, ...linkProps } = props as LinkProps;
     return (
@@ -55,7 +75,6 @@ export function Button({
     );
   }
 
-  // anchor 태그로 렌더링
   if (as === "a") {
     return (
       <a
@@ -67,7 +86,6 @@ export function Button({
     );
   }
 
-  // 기본 button 태그로 렌더링
   return (
     <button
       className={baseClassName}
