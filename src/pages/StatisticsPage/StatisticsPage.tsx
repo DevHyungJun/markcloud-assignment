@@ -109,8 +109,8 @@ export function StatisticsPage() {
             )}
           >
             {availableCountries.length > 0
-              ? `${availableCountries.length}개 국가의 상표 데이터를 비교 분석합니다.`
-              : "상표 데이터를 비교 분석합니다."}
+              ? `${availableCountries.length}개 국가의 상표 데이터를 비교 분석하여, 통계 및 분석 결과를 제공합니다.`
+              : "상표 데이터를 불러오지 못했습니다."}
           </p>
         </div>
         {isLoading ? (

@@ -26,6 +26,8 @@ export function FavoritesView() {
           )}
         </h2>
         <p className="text-gray-400 font-medium text-xs leading-relaxed sm:text-sm">
+          페이지를 새로고침하거나 브라우저를 닫아도 즐겨찾기 목록은 안전하게
+          보관됩니다. <br />
           즐겨찾기를 삭제하시더라도 페이지를 벗어나기 전까지 즐겨찾기 목록에서
           지워지지 않으며, 다시 해당 상표를 즐겨찾기에 추가할 수 있습니다.
         </p>
