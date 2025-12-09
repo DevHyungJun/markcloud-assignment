@@ -13,7 +13,7 @@ export function FavoritesView() {
 
   return (
     <div className="space-y-4">
-      <div className="flex justify-between items-center">
+      <div className="flex flex-col justify-between">
         <h2
           className={cn(
             "text-xl tracking-tight leading-tight font-bold text-gray-900 mb-2",
@@ -25,6 +25,10 @@ export function FavoritesView() {
             <span>({favorites.length})</span>
           )}
         </h2>
+        <p className="text-gray-400 font-medium text-xs leading-relaxed sm:text-sm">
+          즐겨찾기를 삭제하시더라도 페이지를 벗어나기 전까지 즐겨찾기 목록에서
+          지워지지 않으며, 다시 해당 상표를 즐겨찾기에 추가할 수 있습니다.
+        </p>
       </div>
 
       <div className="space-y-3">
