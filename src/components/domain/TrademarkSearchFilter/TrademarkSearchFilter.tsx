@@ -207,7 +207,20 @@ export function TrademarkSearchFilter() {
         <Input
           label="출원번호 검색"
           placeholder="출원번호를 입력하세요"
-          {...register("applicationNumber")}
+          {...register("applicationNumber", {
+            pattern: {
+              value: /^[0-9]*$/,
+              message: "숫자만 입력 가능합니다",
+            },
+            onChange: (e) => {
+              // 숫자가 아닌 문자 제거
+              const value = e.target.value.replace(/[^0-9]/g, "");
+              setValue("applicationNumber", value, {
+                shouldValidate: true,
+                shouldDirty: true,
+              });
+            },
+          })}
         />
         <Input label="출원일 시작" type="date" {...register("dateFrom")} />
         <Input label="출원일 종료" type="date" {...register("dateTo")} />
