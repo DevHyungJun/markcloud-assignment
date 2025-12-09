@@ -34,7 +34,7 @@ export function Header() {
   };
 
   return (
-    <header className="bg-sky-300/75 shadow-sm sticky top-0 z-50">
+    <header className="bg-linear-to-r from-white/50 via-sky-400/60 to-white/50 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <Link
@@ -49,13 +49,13 @@ export function Header() {
           </Link>
 
           {/* 데스크톱 메뉴 */}
-          <div className="hidden md:flex items-center gap-2">
+          <div className="hidden md:flex items-center gap-1">
             {!isStatisticsPage && (
               <Button
                 as={Link}
                 to="/statistics"
                 className={cn(
-                  "flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md",
+                  "flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 bg-white rounded-md",
                   "hover:bg-gray-50",
                   "focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                 )}
@@ -69,7 +69,7 @@ export function Header() {
                 as={Link}
                 to="/favorites"
                 className={cn(
-                  "relative flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md",
+                  "relative flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 bg-white rounded-md",
                   "hover:bg-gray-50",
                   "focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                 )}
@@ -95,7 +95,7 @@ export function Header() {
           {/* 모바일 햄버거 메뉴 버튼 */}
           <button
             onClick={toggleMobileMenu}
-            className="md:hidden p-2 rounded-md text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+            className="md:hidden rounded-md text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
             aria-label="메뉴 열기"
           >
             {isMobileMenuOpen ? (
@@ -131,7 +131,7 @@ export function Header() {
           >
             <div className="flex flex-col h-full">
               {/* 메뉴 헤더 */}
-              <div className="flex items-center justify-end p-4">
+              <div className="flex items-center justify-end p-2 sm:p-4">
                 <button
                   onClick={toggleMobileMenu}
                   className="p-2 rounded-md text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
@@ -142,7 +142,7 @@ export function Header() {
               </div>
 
               {/* 메뉴 항목 */}
-              <nav className="flex-1 overflow-y-auto p-4">
+              <nav className="flex-1 overflow-y-auto p-2 sm:p-4">
                 <div className="flex flex-col gap-2">
                   {!isStatisticsPage && (
                     <Link
