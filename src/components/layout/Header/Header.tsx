@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useFavorites } from "@/hooks";
 import { Button, Icon } from "@/components/common";
@@ -6,9 +7,31 @@ import { cn } from "@/utils";
 export function Header() {
   const { count } = useFavorites();
   const location = useLocation();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const isFavoritesPage = location.pathname === "/favorites";
   const isStatisticsPage = location.pathname === "/statistics";
+
+  // 모바일 메뉴가 열려있을 때 body 스크롤 방지
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isMobileMenuOpen]);
+
+  // 페이지 이동 시 모바일 메뉴 닫기
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location.pathname]);
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen((prev) => !prev);
+  };
 
   return (
     <header className="bg-sky-200 shadow-sm sticky top-0 z-50">
@@ -24,7 +47,9 @@ export function Header() {
               className="w-[112px] h-[30px]"
             />
           </Link>
-          <div className="flex items-center gap-2">
+
+          {/* 데스크톱 메뉴 */}
+          <div className="hidden md:flex items-center gap-2">
             {!isStatisticsPage && (
               <Button
                 as={Link}
@@ -66,8 +91,103 @@ export function Header() {
               </Button>
             )}
           </div>
+
+          {/* 모바일 햄버거 메뉴 버튼 */}
+          <button
+            onClick={toggleMobileMenu}
+            className="md:hidden p-2 rounded-md text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+            aria-label="메뉴 열기"
+          >
+            {isMobileMenuOpen ? (
+              <Icon.Close className="w-6 h-6" />
+            ) : (
+              <Icon.Menu className="w-6 h-6" />
+            )}
+          </button>
         </div>
       </div>
+
+      {/* 모바일 메뉴 오버레이 */}
+      {isMobileMenuOpen && (
+        <>
+          {/* 배경 오버레이 */}
+          <div
+            className={cn(
+              "fixed inset-0 bg-black/50 z-40 md:hidden",
+              "animate-[fadeIn_0.2s_ease-out]"
+            )}
+            onClick={toggleMobileMenu}
+            aria-hidden="true"
+          />
+
+          {/* 모바일 메뉴 */}
+          <div
+            className={cn(
+              "fixed inset-y-0 right-0 w-64 bg-white shadow-xl z-50 md:hidden",
+              "transform transition-transform duration-300 ease-out",
+              "translate-x-0",
+              "animate-[slideInFromRight_0.3s_ease-out]"
+            )}
+          >
+            <div className="flex flex-col h-full">
+              {/* 메뉴 헤더 */}
+              <div className="flex items-center justify-end p-4">
+                <button
+                  onClick={toggleMobileMenu}
+                  className="p-2 rounded-md text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
+                  aria-label="메뉴 닫기"
+                >
+                  <Icon.Close className="w-6 h-6" />
+                </button>
+              </div>
+
+              {/* 메뉴 항목 */}
+              <nav className="flex-1 overflow-y-auto p-4">
+                <div className="flex flex-col gap-2">
+                  {!isStatisticsPage && (
+                    <Link
+                      to="/statistics"
+                      onClick={toggleMobileMenu}
+                      className={cn(
+                        "flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700",
+                        "hover:bg-gray-100",
+                        "transition-colors"
+                      )}
+                    >
+                      <Icon.Statistics className="w-5 h-5" />
+                      <span className="font-medium">통계/분석</span>
+                    </Link>
+                  )}
+                  {!isFavoritesPage && (
+                    <Link
+                      to="/favorites"
+                      onClick={toggleMobileMenu}
+                      className={cn(
+                        "relative flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700",
+                        "hover:bg-gray-100",
+                        "transition-colors"
+                      )}
+                    >
+                      <Icon.Favorite
+                        className={cn(
+                          "w-5 h-5 text-yellow-500",
+                          count > 0 && "fill-yellow-500"
+                        )}
+                      />
+                      <span className="font-medium">즐겨찾기</span>
+                      {count > 0 && (
+                        <span className="ml-auto bg-red-500 text-white text-xs rounded-full h-6 w-6 flex items-center justify-center">
+                          {count}
+                        </span>
+                      )}
+                    </Link>
+                  )}
+                </div>
+              </nav>
+            </div>
+          </div>
+        </>
+      )}
     </header>
   );
 }
