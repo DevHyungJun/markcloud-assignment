@@ -36,8 +36,13 @@ export function TrademarkListItem({
               alt={countryMetadata.flagAlt}
               className="w-5 h-5 object-contain"
             />
-            <h3 className="text-lg font-semibold text-gray-900 line-clamp-1">
-              {trademark.displayName}
+            <h3
+              className={cn(
+                "text-lg font-semibold text-gray-900 line-clamp-1",
+                !trademark.displayName && "text-gray-300 font-normal"
+              )}
+            >
+              {!trademark.displayName ? "상표명 없음" : trademark.displayName}
             </h3>
             {trademark.englishName &&
               trademark.englishName !== trademark.displayName && (
