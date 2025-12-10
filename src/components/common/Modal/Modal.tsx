@@ -1,6 +1,6 @@
 import { ReactNode, useEffect } from "react";
 import { createPortal } from "react-dom";
-import { Button } from "../Button/Button";
+import Button from "../Button/Button";
 import { cn } from "@/utils";
 import { SIZE_STYLES } from "./MODAL_STYLES";
 
@@ -12,13 +12,13 @@ interface ModalProps {
   size?: "sm" | "md" | "lg" | "xl";
 }
 
-export function Modal({
+const Modal = ({
   isOpen,
   onClose,
   title,
   children,
   size = "md",
-}: ModalProps) {
+}: ModalProps) => {
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -69,4 +69,6 @@ export function Modal({
     </div>,
     document.body
   );
-}
+};
+
+export default Modal;

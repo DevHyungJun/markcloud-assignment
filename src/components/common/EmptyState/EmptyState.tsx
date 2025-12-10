@@ -1,4 +1,4 @@
-import { Button } from "../Button/Button";
+import Button from "../Button/Button";
 import { Link } from "react-router-dom";
 import { BUTTON_STYLES } from "./BUTTON_STYLES";
 
@@ -9,12 +9,7 @@ interface EmptyStateProps {
   refetch?: () => void;
 }
 
-export function EmptyState({
-  title,
-  description,
-  icon,
-  refetch,
-}: EmptyStateProps) {
+const EmptyState = ({ title, description, icon, refetch }: EmptyStateProps) => {
   return (
     <div className="flex flex-col items-center justify-center py-12 px-4">
       {icon && <div className="mb-4 text-gray-400">{icon}</div>}
@@ -46,4 +41,6 @@ export function EmptyState({
       )}
     </div>
   );
-}
+};
+
+export default EmptyState;

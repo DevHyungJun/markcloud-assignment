@@ -6,7 +6,7 @@ interface ErrorMessageProps {
   onRetry?: () => void;
 }
 
-export function ErrorMessage({ message, onRetry }: ErrorMessageProps) {
+const ErrorMessage = ({ message, onRetry }: ErrorMessageProps) => {
   return (
     <div className="bg-red-50 border border-red-200 rounded-lg p-4">
       <div className="flex items-start">
@@ -33,4 +33,6 @@ export function ErrorMessage({ message, onRetry }: ErrorMessageProps) {
       </div>
     </div>
   );
-}
+};
+
+export default ErrorMessage;

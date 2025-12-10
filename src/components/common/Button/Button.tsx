@@ -51,14 +51,14 @@ type ButtonProps =
  * @param props - Button 컴포넌트의 props
  * @returns 렌더링된 버튼 요소
  */
-export function Button({
+const Button = ({
   variant = "primary",
   size = "md",
   className = "",
   children,
   as,
   ...props
-}: ButtonProps) {
+}: ButtonProps) => {
   const baseClassName = cn(
     BASE_STYLES,
     VARIANT_STYLES[variant],
@@ -94,4 +94,6 @@ export function Button({
       {children}
     </button>
   );
-}
+};
+
+export default Button;

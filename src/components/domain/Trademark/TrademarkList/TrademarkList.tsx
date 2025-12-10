@@ -7,7 +7,7 @@ import { TrademarkListItem } from "../TrademarkListItem/TrademarkListItem";
 import { TrademarkDetailModal } from "../TrademarkDetailModal/TrademarkDetailModal";
 import { TrademarkSkeletonList } from "@/components/domain/Trademark/TrademarkSkeleton/TrademarkSkeleton";
 import { EmptyState } from "@/components/common/EmptyState/EmptyState";
-import { ErrorMessage } from "@/components/common/ErrorMessage/ErrorMessage";
+import ErrorMessage from "@/components/common/ErrorMessage/ErrorMessage";
 
 export function TrademarkList() {
   const { filter, resetFilter } = useTrademarkStore();
