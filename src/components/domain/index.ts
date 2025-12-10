@@ -1,7 +1,7 @@
-export { TrademarkSearchFilter } from "./TrademarkSearchFilter/TrademarkSearchFilter";
-export { TrademarkList } from "./TrademarkList/TrademarkList";
-export { TrademarkListItem } from "./TrademarkListItem/TrademarkListItem";
-export { TrademarkDetailModal } from "./TrademarkDetailModal/TrademarkDetailModal";
+export { TrademarkSearchFilter } from "./Trademark/TrademarkSearchFilter/TrademarkSearchFilter";
+export { TrademarkList } from "./Trademark/TrademarkList/TrademarkList";
+export { TrademarkListItem } from "./Trademark/TrademarkListItem/TrademarkListItem";
+export { TrademarkDetailModal } from "./Trademark/TrademarkDetailModal/TrademarkDetailModal";
 export { FavoritesView } from "./Favorite/FavoritesView/FavoritesView";
 export { ProductCategoryChart } from "./Statistics/ProductCategoryChart/ProductCategoryChart";
 export { RegistrationDurationChart } from "./Statistics/RegistrationDurationChart/RegistrationDurationChart";
