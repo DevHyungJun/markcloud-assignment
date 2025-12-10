@@ -1,10 +1,10 @@
 import { useMemo } from "react";
 import { useQueries } from "@tanstack/react-query";
 import { MainLayout } from "@/components/layout";
-import { NormalizedTrademark, Country } from "@/types/trademark/trademark";
+import { NormalizedTrademark, Country } from "@/types";
 import { adaptTrademarks, cn } from "@/utils";
 import { COUNTRY_DATA_SOURCES } from "@/constants/COUNTRY_DATA_SOURCES";
-import { getCountryOptions } from "@/config/countryConfig";
+import { getCountryOptions } from "@/config";
 import {
   aggregateByStatus,
   aggregateByYear,

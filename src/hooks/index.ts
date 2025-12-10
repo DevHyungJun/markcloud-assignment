@@ -1,2 +1,2 @@
-export { useFavorites } from "./useFavorites/useFavorites";
-export { useTrademarks } from "./useTrademarks/useTrademarks";
+export { default as useFavorites } from "./useFavorites/useFavorites";
+export { default as useTrademarks } from "./useTrademarks/useTrademarks";

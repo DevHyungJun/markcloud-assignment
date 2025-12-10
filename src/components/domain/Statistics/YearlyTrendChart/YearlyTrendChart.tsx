@@ -9,9 +9,9 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { YearlyData } from "@/utils/statistics/aggregateStatistics";
-import { Country } from "@/types/trademark/trademark";
+import { Country } from "@/types";
 import { getAllCountryColors } from "@/utils/statistics/chartColors";
-import { getCountryMetadata } from "@/config/countryConfig";
+import { getCountryMetadata } from "@/config";
 
 interface YearlyTrendChartProps {
   data: YearlyData[];

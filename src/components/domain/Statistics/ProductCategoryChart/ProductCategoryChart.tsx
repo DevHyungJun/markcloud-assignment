@@ -9,16 +9,19 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { CategoryData } from "@/utils/statistics/aggregateStatistics";
-import { Country } from "@/types/trademark/trademark";
+import { Country } from "@/types";
 import { getAllCountryColors } from "@/utils/statistics/chartColors";
-import { getCountryMetadata } from "@/config/countryConfig";
+import { getCountryMetadata } from "@/config";
 
 interface ProductCategoryChartProps {
   data: CategoryData[];
   countries: Country[];
 }
 
-const ProductCategoryChart = ({ data, countries }: ProductCategoryChartProps) => {
+const ProductCategoryChart = ({
+  data,
+  countries,
+}: ProductCategoryChartProps) => {
   const countryColors = getAllCountryColors(countries);
 
   return (

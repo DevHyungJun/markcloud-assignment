@@ -1,13 +1,10 @@
 import { useEffect, useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { useTrademarkStore } from "@/stores/trademarkStore";
-import { TrademarkStatus, Country } from "@/types/trademark/trademark";
+import { TrademarkStatus, Country } from "@/types";
 import { Button, Icon, Input } from "@/components/common";
 import { cn } from "@/utils";
-import {
-  getStatusOptionsForCountry,
-  getCountryOptions,
-} from "@/config/countryConfig";
+import { getStatusOptionsForCountry, getCountryOptions } from "@/config";
 
 interface SearchFormData {
   searchText: string;

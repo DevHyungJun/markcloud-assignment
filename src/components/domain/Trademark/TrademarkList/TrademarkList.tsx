@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
-import { useTrademarks } from "@/hooks/useTrademarks/useTrademarks";
+import { useTrademarks } from "@/hooks";
 import { useTrademarkStore } from "@/stores/trademarkStore";
-import { NormalizedTrademark } from "@/types/trademark/trademark";
+import { NormalizedTrademark } from "@/types";
 import TrademarkListItem from "../TrademarkListItem/TrademarkListItem";
 import TrademarkDetailModal from "../TrademarkDetailModal/TrademarkDetailModal";
-import { TrademarkSkeletonList } from "@/components/domain/Trademark/TrademarkSkeleton/TrademarkSkeleton";
-import { EmptyState } from "@/components/common/EmptyState/EmptyState";
-import ErrorMessage from "@/components/common/ErrorMessage/ErrorMessage";
+import { TrademarkSkeletonList } from "../TrademarkSkeleton/TrademarkSkeleton";
+import { EmptyState, ErrorMessage } from "@/components/common";
 
 const TrademarkList = () => {
   const { filter, resetFilter } = useTrademarkStore();

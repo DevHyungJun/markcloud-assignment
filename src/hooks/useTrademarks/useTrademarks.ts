@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useMemo, useState, useEffect } from "react";
-import { NormalizedTrademark, Country } from "@/types/trademark/trademark";
+import { NormalizedTrademark, Country } from "@/types";
 import { adaptTrademarks, filterTrademarks, sortTrademarks } from "@/utils";
 import { useTrademarkStore } from "@/stores/trademarkStore";
 import { COUNTRY_DATA_SOURCES } from "@/constants/COUNTRY_DATA_SOURCES";
@@ -8,17 +8,17 @@ import { COUNTRY_DATA_SOURCES } from "@/constants/COUNTRY_DATA_SOURCES";
 const ITEMS_PER_PAGE = 10; // 페이지당 아이템 수를 줄여서 점진적 로딩 효과
 
 // Mock API 함수 (설정 기반)
-async function fetchTrademarks(
+const fetchTrademarks = async (
   country: Country
-): Promise<NormalizedTrademark[]> {
+): Promise<NormalizedTrademark[]> => {
   // 실제로는 API 호출이지만, 여기서는 mock 데이터 사용
   await new Promise((resolve) => setTimeout(resolve, 300)); // 로딩 시뮬레이션
 
   const dataSource = COUNTRY_DATA_SOURCES[country];
   return adaptTrademarks(dataSource as any[], country);
-}
+};
 
-export function useTrademarks(page: number) {
+const useTrademarks = (page: number) => {
   const { selectedCountry, filter, sortOrder } = useTrademarkStore();
   const [isLoadingMore, setIsLoadingMore] = useState(false);
 
@@ -32,7 +32,10 @@ export function useTrademarks(page: number) {
   // 필터링 및 정렬된 데이터
   const filteredData = useMemo(() => {
     if (!data) return [];
-    const filtered = filterTrademarks(data, { ...filter, country: selectedCountry });
+    const filtered = filterTrademarks(data, {
+      ...filter,
+      country: selectedCountry,
+    });
     return sortTrademarks(filtered, sortOrder);
   }, [data, filter, selectedCountry, sortOrder]);
 
@@ -67,4 +70,6 @@ export function useTrademarks(page: number) {
     hasMore,
     refetch,
   };
-}
+};
+
+export default useTrademarks;

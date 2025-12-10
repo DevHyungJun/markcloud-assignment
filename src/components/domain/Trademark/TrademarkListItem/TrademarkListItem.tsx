@@ -1,8 +1,8 @@
-import { NormalizedTrademark } from "@/types/trademark/trademark";
+import { NormalizedTrademark } from "@/types";
 import { useTrademarkStore } from "@/stores/trademarkStore";
 import { cn, formatDate } from "@/utils";
 import { Icon } from "@/components/common";
-import { getCountryMetadata } from "@/config/countryConfig";
+import { getCountryMetadata } from "@/config";
 import { STATUS_LABELS } from "@/constants/STATUS_LABELS";
 import { STATUS_COLORS } from "./STATUS_COLORS";
 
@@ -11,10 +11,7 @@ interface TrademarkListItemProps {
   onClick: () => void;
 }
 
-const TrademarkListItem = ({
-  trademark,
-  onClick,
-}: TrademarkListItemProps) => {
+const TrademarkListItem = ({ trademark, onClick }: TrademarkListItemProps) => {
   const { isFavorite, toggleFavorite } = useTrademarkStore();
   const countryMetadata = getCountryMetadata(trademark.country);
 

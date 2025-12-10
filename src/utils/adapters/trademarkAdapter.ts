@@ -5,7 +5,7 @@ import {
   TrademarkStatus,
   Country,
 } from "@/types/trademark/trademark";
-import { getCountryAdapter } from "@/config/countryConfig";
+import { getCountryAdapter } from "@/config";
 
 // 한국 상태를 공통 상태로 변환
 function normalizeKrStatus(status: string): TrademarkStatus {

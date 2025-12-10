@@ -1,7 +1,7 @@
 import { Modal } from "@/components/common";
-import { NormalizedTrademark } from "@/types/trademark/trademark";
+import { NormalizedTrademark } from "@/types";
 import { formatDate } from "@/utils";
-import { shouldShowField, getCountryMetadata } from "@/config/countryConfig";
+import { shouldShowField, getCountryMetadata } from "@/config";
 import { STATUS_LABELS } from "@/constants/STATUS_LABELS";
 
 interface TrademarkDetailModalProps {

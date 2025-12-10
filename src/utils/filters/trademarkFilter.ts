@@ -1,12 +1,9 @@
-import {
-  NormalizedTrademark,
-  TrademarkFilter,
-} from "@/types/trademark/trademark";
+import { NormalizedTrademark, TrademarkFilter } from "@/types";
 
-export function filterTrademarks(
+const filterTrademarks = (
   trademarks: NormalizedTrademark[],
   filter: TrademarkFilter
-): NormalizedTrademark[] {
+): NormalizedTrademark[] => {
   return trademarks.filter((trademark) => {
     // 국가 필터
     if (filter.country && trademark.country !== filter.country) {
@@ -57,4 +54,6 @@ export function filterTrademarks(
 
     return true;
   });
-}
+};
+
+export default filterTrademarks;
