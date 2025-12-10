@@ -1,12 +1,12 @@
 import { ReactNode } from "react";
-import { Header } from "../Header/Header";
+import Header from "../Header/Header";
 import { cn } from "@/utils";
 
 interface MainLayoutProps {
   children: ReactNode;
 }
 
-export function MainLayout({ children }: MainLayoutProps) {
+const MainLayout = ({ children }: MainLayoutProps) => {
   return (
     <div className="min-h-dvh bg-gray-50">
       <Header />
@@ -15,4 +15,6 @@ export function MainLayout({ children }: MainLayoutProps) {
       </main>
     </div>
   );
-}
+};
+
+export default MainLayout;

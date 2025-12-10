@@ -1,2 +1,2 @@
-export { Header } from "./Header/Header";
-export { MainLayout } from "./MainLayout/MainLayout";
+export { default as Header } from "./Header/Header";
+export { default as MainLayout } from "./MainLayout/MainLayout";

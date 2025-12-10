@@ -4,7 +4,7 @@ import { useFavorites } from "@/hooks";
 import { Button, Icon } from "@/components/common";
 import { cn } from "@/utils";
 
-export function Header() {
+const Header = () => {
   const { count } = useFavorites();
   const location = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -190,4 +190,6 @@ export function Header() {
       )}
     </header>
   );
-}
+};
+
+export default Header;
