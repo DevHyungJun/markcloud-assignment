@@ -4,10 +4,14 @@ import { useTrademarkStore } from "@/stores";
 import { NormalizedTrademark } from "@/types";
 import { adaptTrademarks } from "@/utils";
 import { COUNTRY_DATA_SOURCES } from "@/constants/COUNTRY_DATA_SOURCES";
+import {
+  QUERY_STALE_TIME_MS,
+  LOADING_DELAY_MS,
+} from "@/constants/API_CONSTANTS";
 
 // 모든 국가의 데이터를 가져오는 함수
 const fetchAllTrademarks = async (): Promise<NormalizedTrademark[]> => {
-  await new Promise((resolve) => setTimeout(resolve, 100));
+  await new Promise((resolve) => setTimeout(resolve, LOADING_DELAY_MS.FAST));
 
   const krTrademarks = adaptTrademarks(COUNTRY_DATA_SOURCES.KR as any[], "KR");
   const usTrademarks = adaptTrademarks(COUNTRY_DATA_SOURCES.US as any[], "US");
@@ -22,7 +26,7 @@ const useFavorites = () => {
   const { data: allTrademarks = [], isLoading } = useQuery({
     queryKey: ["allTrademarks"],
     queryFn: fetchAllTrademarks,
-    staleTime: 5 * 60 * 1000, // 5분
+    staleTime: QUERY_STALE_TIME_MS,
   });
 
   const favoriteTrademarks = useMemo(() => {

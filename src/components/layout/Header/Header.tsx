@@ -42,7 +42,7 @@ const Header = () => {
             className="text-2xl font-bold text-gray-900 flex items-center"
           >
             <img
-              src="/public/logo/markCloudLogo.webp"
+              src="/logo/markCloudLogo.webp"
               alt="MarkCloud"
               className="w-[112px] h-[30px]"
             />

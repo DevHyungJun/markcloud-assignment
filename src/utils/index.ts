@@ -11,3 +11,4 @@ export { default as sortTrademarks } from "./sortTrademarks/sortTrademarks";
 export type { SortOrder } from "./sortTrademarks/sortTrademarks";
 export * from "./statistics/aggregateStatistics";
 export * from "./statistics/chartColors";
+export { fetchTrademarksByCountry } from "./api/trademarkApi";

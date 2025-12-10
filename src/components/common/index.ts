@@ -7,5 +7,6 @@ export {
 export { default as EmptyState } from "./EmptyState/EmptyState";
 export { default as ErrorMessage } from "./ErrorMessage/ErrorMessage";
 export { default as Modal } from "./Modal/Modal";
+export { default as PageHeader } from "./PageHeader/PageHeader";
 export { default as TopScrollButton } from "./TopScrollButton/TopScrollButton";
 export * from "./Icon/Icon";

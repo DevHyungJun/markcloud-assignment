@@ -3,6 +3,7 @@ import { useInView } from "react-intersection-observer";
 import { useTrademarks } from "@/hooks";
 import { useTrademarkStore } from "@/stores";
 import { NormalizedTrademark } from "@/types";
+import { LOADING_DELAY_MS } from "@/constants/API_CONSTANTS";
 import TrademarkListItem from "../TrademarkListItem/TrademarkListItem";
 import TrademarkDetailModal from "../TrademarkDetailModal/TrademarkDetailModal";
 import { TrademarkSkeletonList } from "../TrademarkSkeleton/TrademarkSkeleton";
@@ -33,7 +34,7 @@ const TrademarkList = () => {
       // 약간의 딜레이를 추가하여 점진적 로딩 효과
       const timer = setTimeout(() => {
         setPage(currentPage + 1);
-      }, 100);
+      }, LOADING_DELAY_MS.FAST);
       return () => clearTimeout(timer);
     }
   }, [inView, hasMore, isLoading, currentPage]);
