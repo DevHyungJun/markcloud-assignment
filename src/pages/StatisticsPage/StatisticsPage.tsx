@@ -11,11 +11,13 @@ import {
   aggregateByCategory,
   aggregateByRegistrationDuration,
 } from "@/utils/statistics/aggregateStatistics";
-import { StatusDistributionChart } from "@/components/domain/Statistics/StatusDistributionChart";
-import { YearlyTrendChart } from "@/components/domain/Statistics/YearlyTrendChart";
-import { ProductCategoryChart } from "@/components/domain/Statistics/ProductCategoryChart";
-import { RegistrationDurationChart } from "@/components/domain/Statistics/RegistrationDurationChart";
-import StatisticsSkeleton from "@/components/domain/Statistics/statisticsSkeleton";
+import {
+  StatusDistributionChart,
+  YearlyTrendChart,
+  ProductCategoryChart,
+  RegistrationDurationChart,
+  StatisticsSkeleton,
+} from "@/components/domain";
 
 // 국가별 데이터 가져오기
 async function fetchTrademarksByCountry(

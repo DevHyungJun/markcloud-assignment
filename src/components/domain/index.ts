@@ -2,4 +2,9 @@ export { TrademarkSearchFilter } from "./TrademarkSearchFilter/TrademarkSearchFi
 export { TrademarkList } from "./TrademarkList/TrademarkList";
 export { TrademarkListItem } from "./TrademarkListItem/TrademarkListItem";
 export { TrademarkDetailModal } from "./TrademarkDetailModal/TrademarkDetailModal";
-export { FavoritesView } from "./FavoritesView/FavoritesView";
+export { FavoritesView } from "./Favorite/FavoritesView/FavoritesView";
+export { ProductCategoryChart } from "./Statistics/ProductCategoryChart/ProductCategoryChart";
+export { RegistrationDurationChart } from "./Statistics/RegistrationDurationChart/RegistrationDurationChart";
+export { default as StatisticsSkeleton } from "./Statistics/StatisticsSkeleton/StatisticsSkeleton";
+export { StatusDistributionChart } from "./Statistics/StatusDistributionChart/StatusDistributionChart";
+export { YearlyTrendChart } from "./Statistics/YearlyTrendChart/YearlyTrendChart";

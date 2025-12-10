@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useFavorites } from "@/hooks";
 import { NormalizedTrademark } from "@/types/trademark/trademark";
-import { TrademarkListItem } from "../TrademarkListItem/TrademarkListItem";
-import { TrademarkDetailModal } from "../TrademarkDetailModal/TrademarkDetailModal";
+import { TrademarkListItem } from "../../TrademarkListItem/TrademarkListItem";
+import { TrademarkDetailModal } from "../../TrademarkDetailModal/TrademarkDetailModal";
 import { EmptyState, TrademarkSkeletonList } from "@/components/common";
 import { cn } from "@/utils";
 
