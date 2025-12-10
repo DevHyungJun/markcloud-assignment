@@ -22,11 +22,12 @@ const TrademarkSearchFilter = () => {
 
   const onSubmit = (data: SearchFormData) => {
     const { searchText, applicationNumber, dateFrom, dateTo } = data;
+
     setFilter({
-      searchText: searchText || undefined,
-      applicationNumber: applicationNumber || undefined,
-      dateFrom: dateFrom || undefined,
-      dateTo: dateTo || undefined,
+      ...(searchText.trim() && { searchText }),
+      ...(applicationNumber.trim() && { applicationNumber }),
+      ...(dateFrom && { dateFrom }),
+      ...(dateTo && { dateTo }),
       status: filter.status,
     });
   };
