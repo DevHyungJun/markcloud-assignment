@@ -1,8 +1,13 @@
 import { Modal } from "@/components/common";
 import { NormalizedTrademark } from "@/types";
-import { formatDate } from "@/utils";
 import { shouldShowField, getCountryMetadata } from "@/config";
-import { STATUS_LABELS } from "@/constants/STATUS_LABELS";
+import {
+  buildBasicFields,
+  buildPublicationFields,
+  buildRegistrationFields,
+  buildProductCodeFields,
+} from "./fieldConfig";
+import { renderField } from "./renderField";
 
 interface TrademarkDetailModalProps {
   trademark: NormalizedTrademark | null;
@@ -16,6 +21,12 @@ const TrademarkDetailModal = ({
   if (!trademark) return null;
 
   const countryMetadata = getCountryMetadata(trademark.country);
+
+  // 필드 데이터 구성
+  const basicFields = buildBasicFields(trademark);
+  const publicationFields = buildPublicationFields(trademark);
+  const registrationFields = buildRegistrationFields(trademark);
+  const productCodeFields = buildProductCodeFields(trademark);
 
   return (
     <Modal
@@ -46,44 +57,9 @@ const TrademarkDetailModal = ({
                 </span>
               </div>
             </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-500">
-                상표명
-              </label>
-              <p className="mt-1 text-base text-gray-900">
-                {trademark.displayName}
-              </p>
-              {trademark.englishName &&
-                trademark.englishName !== trademark.displayName && (
-                  <p className="mt-1 text-sm text-gray-600">
-                    ({trademark.englishName})
-                  </p>
-                )}
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-500">
-                상태
-              </label>
-              <p className="mt-1 text-base text-gray-900">
-                {STATUS_LABELS[trademark.status]}
-              </p>
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-500">
-                출원번호
-              </label>
-              <p className="mt-1 text-base text-gray-900">
-                {trademark.applicationNumber}
-              </p>
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-500">
-                출원일
-              </label>
-              <p className="mt-1 text-base text-gray-900">
-                {formatDate(trademark.applicationDate)}
-              </p>
-            </div>
+            {basicFields.map((field, index) =>
+              renderField(field, `basic-${index}`)
+            )}
           </div>
         </section>
 
@@ -95,24 +71,11 @@ const TrademarkDetailModal = ({
                 공고 정보
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-500">
-                    공고번호
-                  </label>
-                  <p className="mt-1 text-base text-gray-900">
-                    {trademark.publicationNumber}
-                  </p>
-                </div>
-                {trademark.publicationDate && (
-                  <div>
-                    <label className="block text-sm font-medium text-gray-500">
-                      공고일
-                    </label>
-                    <p className="mt-1 text-base text-gray-900">
-                      {formatDate(trademark.publicationDate)}
-                    </p>
-                  </div>
-                )}
+                {publicationFields
+                  .filter((field) => field.value)
+                  .map((field, index) =>
+                    renderField(field, `publication-${index}`)
+                  )}
               </div>
             </section>
           )}
@@ -125,47 +88,9 @@ const TrademarkDetailModal = ({
                 등록 정보
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-500">
-                    등록번호
-                  </label>
-                  <p className="mt-1 text-base text-gray-900">
-                    {trademark.registrationNumber.join(", ")}
-                  </p>
-                </div>
-                {trademark.registrationDate &&
-                  trademark.registrationDate.length > 0 && (
-                    <div>
-                      <label className="block text-sm font-medium text-gray-500">
-                        등록일
-                      </label>
-                      <p className="mt-1 text-base text-gray-900">
-                        {trademark.registrationDate.map(formatDate).join(", ")}
-                      </p>
-                    </div>
-                  )}
-                {shouldShowField(trademark.country, "registrationPubNumber") &&
-                  trademark.registrationPubNumber && (
-                    <div>
-                      <label className="block text-sm font-medium text-gray-500">
-                        등록공고번호
-                      </label>
-                      <p className="mt-1 text-base text-gray-900">
-                        {trademark.registrationPubNumber}
-                      </p>
-                    </div>
-                  )}
-                {shouldShowField(trademark.country, "registrationPubDate") &&
-                  trademark.registrationPubDate && (
-                    <div>
-                      <label className="block text-sm font-medium text-gray-500">
-                        등록공고일
-                      </label>
-                      <p className="mt-1 text-base text-gray-900">
-                        {formatDate(trademark.registrationPubDate)}
-                      </p>
-                    </div>
-                  )}
+                {registrationFields.map((field, index) =>
+                  renderField(field, `registration-${index}`)
+                )}
               </div>
             </section>
           )}
@@ -176,36 +101,9 @@ const TrademarkDetailModal = ({
             상품 분류
           </h3>
           <div className="space-y-2">
-            <div>
-              <label className="block text-sm font-medium text-gray-500">
-                대분류 코드
-              </label>
-              <p className="mt-1 text-base text-gray-900">
-                {trademark.productCodes.mainCodes.join(", ")}
-              </p>
-            </div>
-            {shouldShowField(trademark.country, "subCodes") &&
-              trademark.productCodes.subCodes && (
-                <div>
-                  <label className="block text-sm font-medium text-gray-500">
-                    유사군 코드
-                  </label>
-                  <p className="mt-1 text-base text-gray-900">
-                    {trademark.productCodes.subCodes.join(", ")}
-                  </p>
-                </div>
-              )}
-            {shouldShowField(trademark.country, "usClassCodes") &&
-              trademark.productCodes.usClassCodes && (
-                <div>
-                  <label className="block text-sm font-medium text-gray-500">
-                    US 코드
-                  </label>
-                  <p className="mt-1 text-base text-gray-900">
-                    {trademark.productCodes.usClassCodes.join(", ")}
-                  </p>
-                </div>
-              )}
+            {productCodeFields.map((field, index) =>
+              renderField(field, `product-${index}`)
+            )}
           </div>
         </section>
       </div>
