@@ -1,9 +1,13 @@
 import { cn } from "@/utils";
 
 interface IconProps {
+  /** 추가 CSS 클래스명 (선택적) */
   className?: string;
 }
 
+/**
+ * 오류를 나타내는 아이콘 컴포넌트
+ */
 const Error = ({ className }: IconProps) => {
   return (
     <svg
@@ -20,6 +24,9 @@ const Error = ({ className }: IconProps) => {
   );
 };
 
+/**
+ * 즐겨찾기를 나타내는 별 아이콘 컴포넌트
+ */
 const Favorite = ({ className }: IconProps) => {
   return (
     <svg
@@ -38,6 +45,9 @@ const Favorite = ({ className }: IconProps) => {
   );
 };
 
+/**
+ * 아래 방향 화살표 아이콘 컴포넌트
+ */
 const ArrowDown = ({ className }: IconProps) => {
   return (
     <svg
@@ -56,6 +66,9 @@ const ArrowDown = ({ className }: IconProps) => {
   );
 };
 
+/**
+ * 통계/분석을 나타내는 차트 아이콘 컴포넌트
+ */
 const Statistics = ({ className }: IconProps) => {
   return (
     <svg
@@ -74,6 +87,9 @@ const Statistics = ({ className }: IconProps) => {
   );
 };
 
+/**
+ * 햄버거 메뉴 아이콘 컴포넌트
+ */
 const Menu = ({ className }: IconProps) => {
   return (
     <svg
@@ -92,6 +108,9 @@ const Menu = ({ className }: IconProps) => {
   );
 };
 
+/**
+ * 닫기(X) 아이콘 컴포넌트
+ */
 const Close = ({ className }: IconProps) => {
   return (
     <svg
@@ -110,6 +129,42 @@ const Close = ({ className }: IconProps) => {
   );
 };
 
+/**
+ * 아이콘 컴포넌트 모음
+ *
+ * @remarks
+ * 애플리케이션 전역에서 사용되는 SVG 아이콘 컴포넌트들을 모아놓은 객체입니다.
+ * 모든 아이콘은 `className` prop을 통해 스타일을 커스터마이징할 수 있으며,
+ * `currentColor`를 사용하여 부모 요소의 텍스트 색상을 상속받습니다.
+ *
+ * @example
+ * ```tsx
+ * // 기본 사용
+ * <Icon.Error className="text-red-500" />
+ *
+ * // 즐겨찾기 아이콘
+ * <Icon.Favorite
+ *   className={cn(
+ *     "w-5 h-5",
+ *     isFavorite ? "fill-yellow-400 text-yellow-400" : "fill-none text-gray-400"
+ *   )}
+ * />
+ *
+ * // 드롭다운에서 사용
+ * <Icon.ArrowDown
+ *   className={cn(
+ *     "transition-transform",
+ *     isOpen && "rotate-180"
+ *   )}
+ * />
+ *
+ * // 버튼과 함께 사용
+ * <Button>
+ *   <Icon.Statistics className="w-4 h-4" />
+ *   통계/분석
+ * </Button>
+ * ```
+ */
 export const Icon = {
   Error,
   Favorite,
