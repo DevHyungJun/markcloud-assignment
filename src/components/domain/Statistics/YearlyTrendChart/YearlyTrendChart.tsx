@@ -8,9 +8,8 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import { YearlyData } from "@/utils/statistics/aggregateStatistics";
+import { YearlyData, getAllCountryColors } from "@/utils";
 import { Country } from "@/types";
-import { getAllCountryColors } from "@/utils/statistics/chartColors";
 import { getCountryMetadata } from "@/config";
 
 interface YearlyTrendChartProps {

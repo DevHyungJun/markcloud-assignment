@@ -5,10 +5,7 @@ import {
   TrademarkStatus,
   UsTrademarkRaw,
 } from "@/types";
-import {
-  adaptKrTrademark,
-  adaptUsTrademark,
-} from "@/utils/adapters/trademarkAdapter";
+import { adaptKrTrademark, adaptUsTrademark } from "@/utils";
 
 // 전체 상태 옵션
 export const ALL_STATUS_OPTIONS: { value: TrademarkStatus; label: string }[] = [

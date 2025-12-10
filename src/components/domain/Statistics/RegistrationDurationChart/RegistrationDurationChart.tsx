@@ -8,9 +8,8 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import { DurationData } from "@/utils/statistics/aggregateStatistics";
 import { Country } from "@/types";
-import { getAllCountryColors } from "@/utils/statistics/chartColors";
+import { getAllCountryColors, DurationData } from "@/utils";
 import { getCountryMetadata } from "@/config";
 
 interface RegistrationDurationChartProps {

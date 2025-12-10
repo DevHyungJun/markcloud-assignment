@@ -8,9 +8,8 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import { StatusCount } from "@/utils/statistics/aggregateStatistics";
+import { StatusCount, getAllCountryColors } from "@/utils";
 import { Country } from "@/types";
-import { getAllCountryColors } from "@/utils/statistics/chartColors";
 import { getCountryMetadata } from "@/config";
 
 interface StatusDistributionChartProps {
