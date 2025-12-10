@@ -18,7 +18,7 @@ interface ProductCategoryChartProps {
   countries: Country[];
 }
 
-export function ProductCategoryChart({ data, countries }: ProductCategoryChartProps) {
+const ProductCategoryChart = ({ data, countries }: ProductCategoryChartProps) => {
   const countryColors = getAllCountryColors(countries);
 
   return (
@@ -49,4 +49,6 @@ export function ProductCategoryChart({ data, countries }: ProductCategoryChartPr
       </ResponsiveContainer>
     </div>
   );
-}
+};
+
+export default ProductCategoryChart;

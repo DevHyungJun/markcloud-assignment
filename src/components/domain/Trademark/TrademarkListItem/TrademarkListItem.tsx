@@ -11,10 +11,10 @@ interface TrademarkListItemProps {
   onClick: () => void;
 }
 
-export function TrademarkListItem({
+const TrademarkListItem = ({
   trademark,
   onClick,
-}: TrademarkListItemProps) {
+}: TrademarkListItemProps) => {
   const { isFavorite, toggleFavorite } = useTrademarkStore();
   const countryMetadata = getCountryMetadata(trademark.country);
 
@@ -97,4 +97,6 @@ export function TrademarkListItem({
       </div>
     </div>
   );
-}
+};
+
+export default TrademarkListItem;

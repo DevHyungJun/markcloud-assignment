@@ -18,7 +18,7 @@ interface YearlyTrendChartProps {
   countries: Country[];
 }
 
-export function YearlyTrendChart({ data, countries }: YearlyTrendChartProps) {
+const YearlyTrendChart = ({ data, countries }: YearlyTrendChartProps) => {
   const countryColors = getAllCountryColors(countries);
 
   return (
@@ -61,4 +61,6 @@ export function YearlyTrendChart({ data, countries }: YearlyTrendChartProps) {
       </ResponsiveContainer>
     </div>
   );
-}
+};
+
+export default YearlyTrendChart;

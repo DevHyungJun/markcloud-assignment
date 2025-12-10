@@ -18,10 +18,10 @@ interface StatusDistributionChartProps {
   countries: Country[];
 }
 
-export function StatusDistributionChart({
+const StatusDistributionChart = ({
   data,
   countries,
-}: StatusDistributionChartProps) {
+}: StatusDistributionChartProps) => {
   const countryColors = getAllCountryColors(countries);
 
   return (
@@ -52,4 +52,6 @@ export function StatusDistributionChart({
       </ResponsiveContainer>
     </div>
   );
-}
+};
+
+export default StatusDistributionChart;

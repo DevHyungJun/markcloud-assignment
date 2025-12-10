@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useFavorites } from "@/hooks";
 import { NormalizedTrademark } from "@/types/trademark/trademark";
-import { TrademarkListItem } from "../../Trademark/TrademarkListItem/TrademarkListItem";
-import { TrademarkDetailModal } from "../../Trademark/TrademarkDetailModal/TrademarkDetailModal";
+import TrademarkListItem from "../../Trademark/TrademarkListItem/TrademarkListItem";
+import TrademarkDetailModal from "../../Trademark/TrademarkDetailModal/TrademarkDetailModal";
 import { EmptyState, TrademarkSkeletonList } from "@/components/common";
 import { cn } from "@/utils";
 
-export function FavoritesView() {
+const FavoritesView = () => {
   const { favorites, isLoading } = useFavorites();
   const [selectedTrademark, setSelectedTrademark] =
     useState<NormalizedTrademark | null>(null);
@@ -58,4 +58,6 @@ export function FavoritesView() {
       />
     </div>
   );
-}
+};
+
+export default FavoritesView;

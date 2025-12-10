@@ -16,7 +16,7 @@ interface SearchFormData {
   dateTo: string;
 }
 
-export function TrademarkSearchFilter() {
+const TrademarkSearchFilter = () => {
   const {
     filter,
     setFilter,
@@ -321,4 +321,6 @@ export function TrademarkSearchFilter() {
       </div>
     </form>
   );
-}
+};
+
+export default TrademarkSearchFilter;

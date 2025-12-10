@@ -3,13 +3,13 @@ import { useInView } from "react-intersection-observer";
 import { useTrademarks } from "@/hooks/useTrademarks/useTrademarks";
 import { useTrademarkStore } from "@/stores/trademarkStore";
 import { NormalizedTrademark } from "@/types/trademark/trademark";
-import { TrademarkListItem } from "../TrademarkListItem/TrademarkListItem";
-import { TrademarkDetailModal } from "../TrademarkDetailModal/TrademarkDetailModal";
+import TrademarkListItem from "../TrademarkListItem/TrademarkListItem";
+import TrademarkDetailModal from "../TrademarkDetailModal/TrademarkDetailModal";
 import { TrademarkSkeletonList } from "@/components/domain/Trademark/TrademarkSkeleton/TrademarkSkeleton";
 import { EmptyState } from "@/components/common/EmptyState/EmptyState";
 import ErrorMessage from "@/components/common/ErrorMessage/ErrorMessage";
 
-export function TrademarkList() {
+const TrademarkList = () => {
   const { filter, resetFilter } = useTrademarkStore();
   const [page, setPage] = useState(1);
   const [selectedTrademark, setSelectedTrademark] =
@@ -104,4 +104,6 @@ export function TrademarkList() {
       />
     </div>
   );
-}
+};
+
+export default TrademarkList;

@@ -1,4 +1,4 @@
-export function TrademarkSkeleton() {
+const TrademarkSkeleton = () => {
   return (
     <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
       <div className="flex items-start justify-between">
@@ -87,9 +87,9 @@ export function TrademarkSkeleton() {
       </div>
     </div>
   );
-}
+};
 
-export function TrademarkSkeletonList({ count = 5 }: { count?: number }) {
+const TrademarkSkeletonList = ({ count = 5 }: { count?: number }) => {
   return (
     <div className="space-y-3">
       {Array.from({ length: count }).map((_, index) => (
@@ -97,4 +97,7 @@ export function TrademarkSkeletonList({ count = 5 }: { count?: number }) {
       ))}
     </div>
   );
-}
+};
+
+export default TrademarkSkeleton;
+export { TrademarkSkeletonList };

@@ -18,10 +18,10 @@ interface RegistrationDurationChartProps {
   countries: Country[];
 }
 
-export function RegistrationDurationChart({
+const RegistrationDurationChart = ({
   data,
   countries,
-}: RegistrationDurationChartProps) {
+}: RegistrationDurationChartProps) => {
   const countryColors = getAllCountryColors(countries);
 
   return (
@@ -52,4 +52,6 @@ export function RegistrationDurationChart({
       </ResponsiveContainer>
     </div>
   );
-}
+};
+
+export default RegistrationDurationChart;

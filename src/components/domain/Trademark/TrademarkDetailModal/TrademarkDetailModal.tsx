@@ -9,10 +9,10 @@ interface TrademarkDetailModalProps {
   onClose: () => void;
 }
 
-export function TrademarkDetailModal({
+const TrademarkDetailModal = ({
   trademark,
   onClose,
-}: TrademarkDetailModalProps) {
+}: TrademarkDetailModalProps) => {
   if (!trademark) return null;
 
   const countryMetadata = getCountryMetadata(trademark.country);
@@ -211,4 +211,6 @@ export function TrademarkDetailModal({
       </div>
     </Modal>
   );
-}
+};
+
+export default TrademarkDetailModal;
