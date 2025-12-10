@@ -2,7 +2,7 @@ import { TrademarkSearchFilter, TrademarkList } from "@/components/domain";
 import { MainLayout } from "@/components/layout";
 import { cn } from "@/utils";
 
-export function HomePage() {
+const HomePage = () => {
   return (
     <MainLayout>
       <div className="mb-6">
@@ -34,4 +34,6 @@ export function HomePage() {
       </div>
     </MainLayout>
   );
-}
+};
+
+export default HomePage;

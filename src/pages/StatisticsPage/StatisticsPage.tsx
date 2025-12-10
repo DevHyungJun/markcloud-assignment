@@ -20,15 +20,15 @@ import {
 } from "@/components/domain";
 
 // 국가별 데이터 가져오기
-async function fetchTrademarksByCountry(
+const fetchTrademarksByCountry = async (
   country: Country
-): Promise<NormalizedTrademark[]> {
+): Promise<NormalizedTrademark[]> => {
   await new Promise((resolve) => setTimeout(resolve, 100));
   const dataSource = COUNTRY_DATA_SOURCES[country];
   return adaptTrademarks(dataSource as any[], country);
-}
+};
 
-export function StatisticsPage() {
+const StatisticsPage = () => {
   // 동적으로 모든 국가 가져오기
   const availableCountries = useMemo(
     () => getCountryOptions().map((option) => option.value),
@@ -140,4 +140,6 @@ export function StatisticsPage() {
       </div>
     </MainLayout>
   );
-}
+};
+
+export default StatisticsPage;

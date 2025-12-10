@@ -4,7 +4,7 @@ import { QueryClientProvider } from "@/providers";
 import { HomePage, FavoritesPage, StatisticsPage } from "@/pages";
 import { TopScrollButton } from "@/components/common";
 
-function App() {
+const App = () => {
   return (
     <QueryClientProvider>
       <BrowserRouter>
@@ -17,6 +17,6 @@ function App() {
       </BrowserRouter>
     </QueryClientProvider>
   );
-}
+};
 
 export default App;

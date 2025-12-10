@@ -1,11 +1,12 @@
 import { MainLayout } from "@/components/layout";
 import { FavoritesView } from "@/components/domain";
 
-export function FavoritesPage() {
+const FavoritesPage = () => {
   return (
     <MainLayout>
       <FavoritesView />
     </MainLayout>
   );
-}
+};
 
+export default FavoritesPage;
