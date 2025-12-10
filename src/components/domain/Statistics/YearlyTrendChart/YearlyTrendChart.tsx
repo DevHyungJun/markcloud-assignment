@@ -32,29 +32,27 @@ const YearlyTrendChart = ({ data, countries }: YearlyTrendChartProps) => {
           <YAxis />
           <Tooltip />
           <Legend />
-          {countries.map((country) => {
+          {countries.flatMap((country) => {
             const metadata = getCountryMetadata(country);
             const colors = countryColors[country];
-            return (
-              <>
-                <Line
-                  key={`${country}-applications`}
-                  type="monotone"
-                  dataKey={`${country}Applications`}
-                  stroke={colors.primary}
-                  name={`${metadata.label} 출원`}
-                  strokeWidth={2}
-                />
-                <Line
-                  key={`${country}-registrations`}
-                  type="monotone"
-                  dataKey={`${country}Registrations`}
-                  stroke={colors.secondary}
-                  name={`${metadata.label} 등록`}
-                  strokeDasharray="5 5"
-                />
-              </>
-            );
+            return [
+              <Line
+                key={`${country}-applications`}
+                type="monotone"
+                dataKey={`${country}Applications`}
+                stroke={colors.primary}
+                name={`${metadata.label} 출원`}
+                strokeWidth={2}
+              />,
+              <Line
+                key={`${country}-registrations`}
+                type="monotone"
+                dataKey={`${country}Registrations`}
+                stroke={colors.secondary}
+                name={`${metadata.label} 등록`}
+                strokeDasharray="5 5"
+              />,
+            ];
           })}
         </LineChart>
       </ResponsiveContainer>
