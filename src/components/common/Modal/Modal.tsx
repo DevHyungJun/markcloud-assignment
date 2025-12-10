@@ -5,13 +5,77 @@ import { cn } from "@/utils";
 import { SIZE_STYLES } from "./MODAL_STYLES";
 
 interface ModalProps {
+  /** 모달의 열림/닫힘 상태 */
   isOpen: boolean;
+  /** 모달을 닫을 때 호출되는 함수 */
   onClose: () => void;
+  /** 모달 상단에 표시될 제목 (선택적) */
   title?: string;
+  /** 모달 내부에 표시될 콘텐츠 */
   children: ReactNode;
+  /** 모달의 크기 (기본값: "md") */
   size?: "sm" | "md" | "lg" | "xl";
 }
 
+/**
+ * 모달 다이얼로그 컴포넌트
+ *
+ * @remarks
+ * `createPortal`을 사용하여 body에 직접 렌더링되는 모달 컴포넌트입니다.
+ * 모달이 열릴 때 body의 스크롤을 자동으로 차단하며, 배경을 클릭하거나 "닫기" 버튼을 클릭하면 닫힙니다.
+ * 모달 내용 영역을 클릭해도 닫히지 않도록 이벤트 전파를 막습니다.
+ * 다양한 크기 옵션을 제공하며, 제목과 하단 닫기 버튼이 포함되어 있습니다.
+ *
+ * @example
+ * ```tsx
+ * // 기본 사용
+ * const [isOpen, setIsOpen] = useState(false);
+ * <Modal
+ *   isOpen={isOpen}
+ *   onClose={() => setIsOpen(false)}
+ *   title="상표 상세 정보"
+ * >
+ *   <div>모달 내용</div>
+ * </Modal>
+ *
+ * // 다양한 크기 사용
+ * <Modal
+ *   isOpen={isOpen}
+ *   onClose={onClose}
+ *   title="작은 모달"
+ *   size="sm"
+ * >
+ *   <p>작은 크기의 모달입니다.</p>
+ * </Modal>
+ *
+ * // 제목 없이 사용
+ * <Modal
+ *   isOpen={isOpen}
+ *   onClose={onClose}
+ *   size="lg"
+ * >
+ *   <div className="space-y-4">
+ *     <h2>제목 없이 사용</h2>
+ *     <p>내용만 표시되는 모달입니다.</p>
+ *   </div>
+ * </Modal>
+ *
+ * // 조건부 렌더링
+ * {selectedItem && (
+ *   <Modal
+ *     isOpen={!!selectedItem}
+ *     onClose={() => setSelectedItem(null)}
+ *     title="상세 정보"
+ *     size="xl"
+ *   >
+ *     <ItemDetails item={selectedItem} />
+ *   </Modal>
+ * )}
+ * ```
+ *
+ * @param props - Modal 컴포넌트의 props
+ * @returns 모달 다이얼로그 JSX 요소 (isOpen이 false일 경우 null)
+ */
 const Modal = ({
   isOpen,
   onClose,
