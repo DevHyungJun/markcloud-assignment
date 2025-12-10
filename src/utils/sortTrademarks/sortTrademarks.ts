@@ -1,11 +1,11 @@
-import { NormalizedTrademark } from "@/types/trademark/trademark";
+import { NormalizedTrademark } from "@/types";
 
 export type SortOrder = "dateDesc" | "dateAsc";
 
-export function sortTrademarks(
+const sortTrademarks = (
   trademarks: NormalizedTrademark[],
   sortOrder: SortOrder
-): NormalizedTrademark[] {
+): NormalizedTrademark[] => {
   const sorted = [...trademarks];
 
   switch (sortOrder) {
@@ -25,5 +25,6 @@ export function sortTrademarks(
     default:
       return sorted;
   }
-}
+};
 
+export default sortTrademarks;

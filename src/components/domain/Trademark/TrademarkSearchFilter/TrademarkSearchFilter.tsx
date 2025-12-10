@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { useForm } from "react-hook-form";
-import { useTrademarkStore } from "@/stores/trademarkStore";
+import { useTrademarkStore } from "@/stores";
 import { TrademarkStatus, Country } from "@/types";
 import { Button, Icon, Input } from "@/components/common";
 import { cn } from "@/utils";

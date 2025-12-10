@@ -4,7 +4,6 @@ import {
   KrTrademarkRaw,
   UsTrademarkRaw,
 } from "@/types";
-import {} from "@/utils/adapters/trademarkAdapter";
 import {
   COUNTRY_CONFIG,
   ALL_STATUS_OPTIONS,

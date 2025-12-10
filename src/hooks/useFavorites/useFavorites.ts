@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { useTrademarkStore } from "@/stores/trademarkStore";
+import { useTrademarkStore } from "@/stores";
 import { NormalizedTrademark } from "@/types";
 import { adaptTrademarks } from "@/utils";
 import { COUNTRY_DATA_SOURCES } from "@/constants/COUNTRY_DATA_SOURCES";

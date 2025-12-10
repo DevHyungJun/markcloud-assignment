@@ -1,16 +1,17 @@
-import { Country } from "@/types/trademark/trademark";
+import { Country } from "@/types";
 
 // 국가별 차트 색상 설정
-const COUNTRY_COLORS: Record<Country, { primary: string; secondary: string }> = {
-  KR: {
-    primary: "#3b82f6", // blue-500
-    secondary: "#60a5fa", // blue-400
-  },
-  US: {
-    primary: "#ef4444", // red-500
-    secondary: "#f87171", // red-400
-  },
-};
+const COUNTRY_COLORS: Record<Country, { primary: string; secondary: string }> =
+  {
+    KR: {
+      primary: "#3b82f6", // blue-500
+      secondary: "#60a5fa", // blue-400
+    },
+    US: {
+      primary: "#ef4444", // red-500
+      secondary: "#f87171", // red-400
+    },
+  };
 
 // 추가 국가를 위한 기본 색상 팔레트
 const DEFAULT_COLORS = [
@@ -22,19 +23,24 @@ const DEFAULT_COLORS = [
 ];
 
 // 국가별 색상 가져오기
-export function getCountryColor(country: Country, index: number = 0): { primary: string; secondary: string } {
+export const getCountryColor = (
+  country: Country,
+  index: number = 0
+): { primary: string; secondary: string } => {
   if (COUNTRY_COLORS[country]) {
     return COUNTRY_COLORS[country];
   }
   // 새로운 국가의 경우 기본 팔레트에서 색상 할당
   return DEFAULT_COLORS[index % DEFAULT_COLORS.length];
-}
+};
 
 // 모든 국가의 색상 가져오기
-export function getAllCountryColors(countries: Country[]): Record<Country, { primary: string; secondary: string }> {
+export const getAllCountryColors = (
+  countries: Country[]
+): Record<Country, { primary: string; secondary: string }> => {
   const colors: Record<string, { primary: string; secondary: string }> = {};
   let defaultIndex = 0;
-  
+
   countries.forEach((country) => {
     if (COUNTRY_COLORS[country]) {
       colors[country] = COUNTRY_COLORS[country];
@@ -43,7 +49,6 @@ export function getAllCountryColors(countries: Country[]): Record<Country, { pri
       defaultIndex++;
     }
   });
-  
-  return colors as Record<Country, { primary: string; secondary: string }>;
-}
 
+  return colors as Record<Country, { primary: string; secondary: string }>;
+};

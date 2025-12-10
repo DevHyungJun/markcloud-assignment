@@ -1,5 +1,5 @@
 import { NormalizedTrademark } from "@/types";
-import { useTrademarkStore } from "@/stores/trademarkStore";
+import { useTrademarkStore } from "@/stores";
 import { cn, formatDate } from "@/utils";
 import { Icon } from "@/components/common";
 import { getCountryMetadata } from "@/config";

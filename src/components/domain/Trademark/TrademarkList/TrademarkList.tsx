@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { useTrademarks } from "@/hooks";
-import { useTrademarkStore } from "@/stores/trademarkStore";
+import { useTrademarkStore } from "@/stores";
 import { NormalizedTrademark } from "@/types";
 import TrademarkListItem from "../TrademarkListItem/TrademarkListItem";
 import TrademarkDetailModal from "../TrademarkDetailModal/TrademarkDetailModal";

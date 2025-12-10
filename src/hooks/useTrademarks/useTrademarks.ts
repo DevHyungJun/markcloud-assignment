@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useMemo, useState, useEffect } from "react";
 import { NormalizedTrademark, Country } from "@/types";
 import { adaptTrademarks, filterTrademarks, sortTrademarks } from "@/utils";
-import { useTrademarkStore } from "@/stores/trademarkStore";
+import { useTrademarkStore } from "@/stores";
 import { COUNTRY_DATA_SOURCES } from "@/constants/COUNTRY_DATA_SOURCES";
 
 const ITEMS_PER_PAGE = 10; // 페이지당 아이템 수를 줄여서 점진적 로딩 효과

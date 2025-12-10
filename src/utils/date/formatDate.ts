@@ -1,5 +1,5 @@
 // 날짜 포맷팅 유틸리티
-export function formatDate(dateString: string): string {
+const formatDate = (dateString: string): string => {
   if (!dateString || dateString.length !== 8) return dateString;
 
   const year = dateString.substring(0, 4);
@@ -7,4 +7,6 @@ export function formatDate(dateString: string): string {
   const day = dateString.substring(6, 8);
 
   return `${year}-${month}-${day}`;
-}
+};
+
+export default formatDate;

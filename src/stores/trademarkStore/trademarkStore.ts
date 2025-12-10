@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
-import { Country, TrademarkFilter } from "@/types/trademark/trademark";
+import { Country, TrademarkFilter } from "@/types";
 
 type SortOrder = "dateDesc" | "dateAsc";
 
@@ -28,7 +28,7 @@ const initialFilter: TrademarkFilter = {
   country: "KR",
 };
 
-export const useTrademarkStore = create<TrademarkStore>()(
+const useTrademarkStore = create<TrademarkStore>()(
   persist(
     (set, get) => ({
       selectedCountry: "KR",
@@ -96,3 +96,5 @@ export const useTrademarkStore = create<TrademarkStore>()(
     }
   )
 );
+
+export default useTrademarkStore;
