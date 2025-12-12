@@ -4,11 +4,13 @@
 
 다국가 상표 검색 서비스는 여러 국가(한국, 미국 등)의 상표 데이터를 통합 검색하고 비교 분석할 수 있는 웹 애플리케이션입니다. 상표명, 출원번호, 출원일, 등록 상태 등 다양한 조건으로 검색할 수 있으며, 상세 정보 확인, 즐겨찾기 기능, 그리고 국가별 데이터의 시각적 통계 분석을 제공합니다.
 
-[프로젝트 스크린샷 또는 데모 이미지]
-![메인 페이지]<img width="1917" height="1953" alt="Image" src="https://github.com/user-attachments/assets/4a11caa9-3fac-4d6d-ae9d-b67c4c06bd98" />
-![통계 페이지]<img width="1916" height="1954" alt="Image" src="https://github.com/user-attachments/assets/3b097be9-02dd-4f3f-8da0-6eee0bd62df2" />
-![즐겨찾기 페이지]<img width="1914" height="1950" alt="Image" src="https://github.com/user-attachments/assets/c2291194-4bdc-4038-9242-aec4b7111ebb" />
-![상세 모달]<img width="1915" height="1956" alt="Image" src="https://github.com/user-attachments/assets/26a0f1e6-9e31-481a-9f2e-c9af32d829a4" />
+<img width="1900" height="1900" alt="메인 페이지" src="https://github.com/user-attachments/assets/4a11caa9-3fac-4d6d-ae9d-b67c4c06bd98" />
+
+<img width="1900" height="1900" alt="통계 페이지" src="https://github.com/user-attachments/assets/3b097be9-02dd-4f3f-8da0-6eee0bd62df2" />
+
+<img width="1900" height="1900" alt="즐겨찾기 페이지" src="https://github.com/user-attachments/assets/c2291194-4bdc-4038-9242-aec4b7111ebb" />
+
+<img width="1900" height="1900" alt="상세 모달" src="https://github.com/user-attachments/assets/26a0f1e6-9e31-481a-9f2e-c9af32d829a4" />
 
 ## 배포 링크
 
