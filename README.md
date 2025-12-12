@@ -1,16 +1,348 @@
-# React + Vite
+# 다국가 상표 검색 서비스
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 프로젝트 개요
 
-Currently, two official plugins are available:
+다국가 상표 검색 서비스는 여러 국가(한국, 미국 등)의 상표 데이터를 통합 검색하고 비교 분석할 수 있는 웹 애플리케이션입니다. 상표명, 출원번호, 출원일, 등록 상태 등 다양한 조건으로 검색할 수 있으며, 상세 정보 확인, 즐겨찾기 기능, 그리고 국가별 데이터의 시각적 통계 분석을 제공합니다.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+[프로젝트 스크린샷 또는 데모 이미지]
+![메인 페이지](./images/main-page.png)
+![검색 결과](./images/search-results.png)
+![통계 페이지](./images/statistics-page.png)
 
-## React Compiler
+## 배포 링크
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+[배포된 사이트 URL을 여기에 입력하세요]
 
-## Expanding the ESLint configuration
+예시: https://your-deployment-url.com
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 기술 스택
+
+### Frontend
+
+- **React 19.2.0** - UI 라이브러리
+- **TypeScript 5.9.3** - 타입 안정성
+- **Vite 7.2.4** - 빌드 도구 및 개발 서버
+
+### 상태 관리 & 데이터 fetching
+
+- **Zustand 5.0.9** - 클라이언트 상태 관리 (필터, 정렬, 즐겨찾기)
+- **React Query (@tanstack/react-query) 5.90.12** - 서버 상태 관리 및 캐싱
+
+### 스타일링
+
+- **Tailwind CSS 4.1.17** - 유틸리티 기반 CSS 프레임워크
+- **tailwind-merge** - Tailwind 클래스 병합 유틸리티
+
+### 라우팅
+
+- **React Router DOM 7.10.1** - 클라이언트 사이드 라우팅
+
+### 폼 관리
+
+- **React Hook Form 7.68.0** - 폼 상태 관리 및 검증
+
+### 차트
+
+- **Recharts 3.5.1** - 데이터 시각화
+
+### 테스트
+
+- **Jest 29.7.0** - 테스트 프레임워크
+- **React Testing Library 16.3.0** - 컴포넌트 테스트 유틸리티
+
+### 기타
+
+- **React Intersection Observer 10.0.0** - 무한 스크롤 구현
+
+## 주요 기능
+
+### 1. 상표 검색 및 필터링
+
+- **국가별 검색**: 한국(KR), 미국(US) 상표 데이터 검색
+- **상표명 검색**: 한글 및 영문 상표명 검색 (대소문자 구분 없음)
+- **출원번호 검색**: 정확한 출원번호로 검색
+- **상태 필터**: 등록, 출원, 거절, 실효 등의 상태별 필터링
+- **날짜 범위 필터**: 출원일 기준 날짜 범위 검색
+
+### 2. 정렬 기능
+
+- 출원일 기준 최신순/오래된순 정렬
+
+### 3. 페이지네이션 및 무한 스크롤
+
+- 페이지당 10개 아이템 표시
+- 무한 스크롤을 통한 편리한 데이터 탐색
+
+### 4. 상표 상세 정보
+
+- 모달을 통한 상표 상세 정보 확인
+- 국가별 차이를 고려한 데이터 표시
+
+### 5. 즐겨찾기
+
+- 상표 즐겨찾기 추가/삭제
+- localStorage를 통한 즐겨찾기 영구 저장
+- 별도 즐겨찾기 페이지에서 관리
+
+### 6. 통계 및 분석
+
+- **상태별 분포 차트**: 국가별 등록 상태 통계
+- **연도별 트렌드**: 연도별 출원 및 등록 추이
+- **상품 분류별 통계**: 상품 분류별 상표 수 (Top 10)
+- **등록 소요 기간 분석**: 출원일부터 등록일까지의 소요 기간 분포
+
+## 프로젝트 구조
+
+```
+src/
+├── components/          # 컴포넌트
+│   ├── common/         # 공통 컴포넌트 (Button, Modal, Input 등)
+│   ├── domain/         # 도메인별 컴포넌트
+│   │   ├── Favorite/   # 즐겨찾기 관련
+│   │   ├── Statistics/ # 통계 차트 컴포넌트
+│   │   └── Trademark/  # 상표 검색/목록 관련
+│   └── layout/         # 레이아웃 컴포넌트
+├── hooks/              # 커스텀 훅
+│   ├── useFavorites/   # 즐겨찾기 훅
+│   └── useTrademarks/  # 상표 목록 훅
+├── pages/              # 페이지 컴포넌트
+│   ├── HomePage/       # 메인 검색 페이지
+│   ├── FavoritesPage/  # 즐겨찾기 페이지
+│   └── StatisticsPage/ # 통계 페이지
+├── stores/             # 상태 관리 (Zustand)
+│   └── trademarkStore/ # 상표 관련 전역 상태
+├── utils/              # 유틸리티 함수
+│   ├── adapters/       # 데이터 변환 (국가별 데이터 정규화)
+│   ├── api/            # API 함수
+│   ├── filters/        # 필터링 로직
+│   ├── sortTrademarks/ # 정렬 로직
+│   └── statistics/     # 통계 집계 로직
+├── types/              # TypeScript 타입 정의
+├── constants/          # 상수 정의
+└── config/             # 설정 파일
+```
+
+## 개발 환경 설정
+
+### 필수 요구사항
+
+- Node.js 18.x 이상
+- npm 또는 yarn
+
+### 설치 및 실행
+
+1. **저장소 클론**
+
+```bash
+git clone [repository-url]
+cd markcloud-assignment
+```
+
+2. **의존성 설치**
+
+```bash
+npm install
+```
+
+3. **개발 서버 실행**
+
+```bash
+npm run dev
+```
+
+개발 서버가 `http://localhost:5173`에서 실행됩니다.
+
+4. **네트워크 접근이 가능한 개발 서버 실행**
+
+```bash
+npm run devM
+```
+
+5. **프로덕션 빌드**
+
+```bash
+npm run build
+```
+
+6. **빌드 결과 미리보기**
+
+```bash
+npm run preview
+```
+
+7. **린팅**
+
+```bash
+npm run lint
+```
+
+## 테스트
+
+### 테스트 실행
+
+```bash
+# 모든 테스트 실행
+npm test
+
+# Watch 모드로 테스트 실행
+npm run test:watch
+
+# 코드 커버리지와 함께 테스트 실행
+npm run test:coverage
+```
+
+### 테스트 커버리지
+
+핵심 비즈니스 로직에 대한 테스트 코드를 작성했습니다:
+
+- ✅ **유틸리티 함수 테스트**
+
+  - `trademarkFilter.test.ts` - 필터링 로직 (22개 테스트)
+  - `sortTrademarks.test.ts` - 정렬 로직 (7개 테스트)
+  - `trademarkAdapter.test.ts` - 데이터 변환 로직 (15개 테스트)
+  - `aggregateStatistics.test.ts` - 통계 집계 로직 (17개 테스트)
+
+- ✅ **상태 관리 테스트**
+
+  - `trademarkStore.test.ts` - Zustand 스토어 테스트 (15개 테스트)
+
+- ✅ **커스텀 훅 테스트**
+  - `useTrademarks.test.tsx` - 상표 목록 훅 테스트 (9개 테스트)
+  - `useFavorites.test.tsx` - 즐겨찾기 훅 테스트 (8개 테스트)
+
+**총 103개의 테스트 케이스가 모두 통과합니다.**
+
+## 주요 구현 특징
+
+### 1. 도메인 주도 설계 (DDD)
+
+- 도메인별로 컴포넌트를 분리하여 관심사의 분리와 유지보수성 향상
+- `components/domain` 디렉토리에 도메인별 컴포넌트 집중
+
+### 2. 데이터 정규화 및 어댑터 패턴
+
+- 국가별로 다른 원본 데이터 구조를 통일된 `NormalizedTrademark` 형식으로 변환
+- `trademarkAdapter.ts`를 통해 한국/미국 데이터의 차이점을 추상화
+
+### 3. 상태 관리 분리
+
+- **Zustand**: UI 상태 (필터, 정렬, 즐겨찾기)
+- **React Query**: 서버 데이터 캐싱 및 동기화
+- 각 상태 관리 라이브러리의 역할을 명확히 분리
+
+### 4. 성능 최적화
+
+- `useMemo`를 활용한 필터링/정렬 결과 메모이제이션
+- React Query의 캐싱 기능으로 불필요한 API 호출 방지
+- 무한 스크롤을 통한 점진적 데이터 로딩
+
+### 5. 스켈레톤 UI를 통한 로딩 상태 개선
+
+- 데이터가 로드되는 동안 실제 콘텐츠와 유사한 구조의 스켈레톤 UI 표시
+- Shimmer 애니메이션을 활용한 시각적 피드백 제공
+- 로딩 상태와 데이터 표시 상태 간의 레이아웃 시프트(Layout Shift) 최소화
+- 실제 UI와 동일한 구조를 가진 스켈레톤으로 사용자 경험의 일관성 유지
+
+### 6. 타입 안정성
+
+- TypeScript를 활용한 엄격한 타입 정의
+- 국가별 데이터 타입을 명확히 구분 (`KrTrademarkRaw`, `UsTrademarkRaw`)
+
+### 7. 재사용 가능한 컴포넌트
+
+- 공통 컴포넌트를 `components/common`에 배치하여 재사용성 향상
+- Props 인터페이스를 통한 명확한 컴포넌트 계약 정의
+
+### 8. 테스트 가능한 코드 구조
+
+- 순수 함수로 작성된 비즈니스 로직 (필터링, 정렬, 집계)
+- 의존성 주입을 통한 테스트 용이성 확보
+
+## 고민한 점, 어려웠던 점
+
+### 1. 국가별 데이터 구조 차이 처리
+
+**문제**: 한국과 미국의 상표 데이터 구조가 다르고, 필드명과 값 형식도 상이함
+
+**해결**:
+
+- Adapter 패턴을 활용하여 각 국가의 원본 데이터를 `NormalizedTrademark`라는 통일된 형식으로 변환
+- 상태 값 (한국: "등록", "출원" vs 미국: "LIVE", "DEAD")을 공통 상태 타입으로 매핑
+- 국가별 차이점을 타입 레벨에서 명확히 구분
+
+### 2. 복잡한 필터링 로직의 테스트
+
+**문제**: 여러 조건을 조합한 필터링 로직의 테스트 케이스 작성이 복잡함
+
+**해결**:
+
+- 각 필터 조건을 독립적으로 테스트하고, 복합 조건도 별도로 검증
+- 엣지 케이스 (빈 값, null 처리 등)를 명시적으로 테스트
+- 22개의 테스트 케이스로 다양한 시나리오 커버
+
+### 3. 통계 데이터 집계 로직의 복잡성
+
+**문제**: 국가별 데이터를 동적으로 집계하는 로직이 복잡하고, 동적 키 생성 필요
+
+**해결**:
+
+- `Map` 자료구조를 활용하여 효율적인 집계
+- 타입 안정성을 유지하면서도 동적 필드 생성 (`[country: string]: number` 인덱스 시그니처 사용)
+- 각 집계 함수를 독립적으로 테스트하여 신뢰성 확보
+
+### 4. React Query와 Zustand의 역할 분리
+
+**문제**: 어떤 상태를 어디에 저장해야 할지 결정하기 어려움
+
+**해결**:
+
+- **React Query**: 서버에서 가져온 데이터와 관련된 상태 (캐싱, 동기화, 리프레시)
+- **Zustand**: 클라이언트에서 발생하는 UI 상태 (필터 값, 정렬 옵션, 즐겨찾기)
+- 각 상태의 생명주기와 목적을 고려하여 명확히 분리
+
+### 5. 즐겨찾기의 영구 저장
+
+**문제**: Zustand의 Set 타입을 localStorage에 직렬화하기 어려움
+
+**해결**:
+
+- Zustand의 `persist` 미들웨어 활용
+- `partialize` 옵션으로 Set을 배열로 변환하여 저장
+- `onRehydrateStorage` 콜백에서 배열을 다시 Set으로 복원
+
+### 6. 무한 스크롤 구현
+
+**문제**: 페이지네이션과 무한 스크롤을 동시에 지원하면서 필터링과 정렬도 고려해야 함
+
+**해결**:
+
+- 필터링/정렬된 전체 데이터를 `useMemo`로 메모이제이션
+- 현재 페이지에 따라 슬라이싱하여 표시할 데이터 결정
+- 페이지 변경 시 로딩 상태 시뮬레이션으로 UX 개선
+
+### 7. 타입 안정성과 유연성의 균형
+
+**문제**: 동적 통계 데이터에서 국가별 필드를 타입으로 정의하기 어려움
+
+**해결**:
+
+- 인덱스 시그니처를 활용하여 타입 안정성 유지
+- 실제 사용 시 타입 가드나 옵셔널 체이닝으로 안전하게 접근
+- 테스트를 통한 런타임 동작 검증
+
+### 8. 로딩 상태의 사용자 경험 개선
+
+**문제**: 단순한 로딩 스피너나 텍스트만 표시하면 사용자가 어떤 콘텐츠가 로드되는지 예상하기 어렵고, 레이아웃 시프트가 발생하여 사용자 경험이 저하됨
+
+**해결**:
+
+- **스켈레톤 UI 도입**: 실제 콘텐츠와 유사한 구조의 스켈레톤 컴포넌트 구현
+  - `TrademarkSkeleton`: 상표 목록 아이템의 스켈레톤
+  - `StatisticsSkeleton`: 통계 차트의 스켈레톤
+- **Shimmer 애니메이션**: CSS 애니메이션을 활용하여 로딩 중임을 명확히 시각화
+- **레이아웃 일관성**: 스켈레톤이 실제 콘텐츠와 동일한 높이와 구조를 가져 레이아웃 시프트 최소화
+- **로딩 상태별 대응**: 초기 로딩과 추가 페이지 로딩에 대해 각각 적절한 스켈레톤 UI 제공
+
+---
+
+[프로젝트 관련 추가 정보나 라이선스 정보를 여기에 입력하세요]
