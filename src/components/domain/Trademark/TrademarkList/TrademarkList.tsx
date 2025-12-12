@@ -10,7 +10,7 @@ import { TrademarkSkeletonList } from "../TrademarkSkeleton/TrademarkSkeleton";
 import { EmptyState, ErrorMessage } from "@/components/common";
 
 const TrademarkList = () => {
-  const { filter, resetFilter } = useTrademarkStore();
+  const { filter, resetFilter, selectedCountry } = useTrademarkStore();
   const [page, setPage] = useState(1);
   const [selectedTrademark, setSelectedTrademark] =
     useState<NormalizedTrademark | null>(null);
@@ -46,6 +46,25 @@ const TrademarkList = () => {
 
   return (
     <>
+      <div className="flex justify-between items-center mb-4">
+        {isInitialLoading ? (
+          <p className="text-lg text-gray-400">불러오는 중...</p>
+        ) : hasError || hasNoData ? (
+          <div className="h-7" />
+        ) : (
+          <p className="text-gray-600 text-lg">
+            <span className="font-bold text-gray-800">
+              {selectedCountry === "KR" ? "한국" : "미국"}
+            </span>{" "}
+            국가의 총
+            <span className="font-semibold text-blue-500 ml-1">
+              {totalCount}
+            </span>
+            개의 결과
+          </p>
+        )}
+      </div>
+
       {isInitialLoading && <TrademarkSkeletonList count={10} />}
 
       {hasError && (
@@ -73,14 +92,6 @@ const TrademarkList = () => {
 
       {!isInitialLoading && !hasError && !hasNoData && (
         <div className="space-y-4">
-          <div className="flex justify-between items-center">
-            <p className="text-gray-600">
-              총
-              <span className="font-semibold text-blue-500">{totalCount}</span>
-              개의 결과
-            </p>
-          </div>
-
           <div className="space-y-3">
             {data.map((trademark) => (
               <TrademarkListItem
