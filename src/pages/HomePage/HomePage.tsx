@@ -1,10 +1,15 @@
 import { TrademarkSearchFilter, TrademarkList } from "@/components/domain";
 import { MainLayout } from "@/components/layout";
-import { PageHeader } from "@/components/common";
+import { PageHeader, SEO } from "@/components/common";
 
 const HomePage = () => {
   return (
     <MainLayout>
+      <SEO
+        title="다국가 상표 검색 서비스 | MarkCloud"
+        description="한국, 미국 등 여러 국가의 상표 데이터를 통합 검색하고 비교 분석할 수 있는 서비스입니다. 상표명, 출원번호, 출원일, 등록 상태 등 다양한 조건으로 검색하고 상세 정보를 확인할 수 있습니다."
+        keywords="상표 검색, 상표 등록, 출원번호 검색, 한국 상표, 미국 상표, 상표 통계, 상표 분석, MarkCloud"
+      />
       <PageHeader
         title="다국가 상표 검색 서비스"
         description={

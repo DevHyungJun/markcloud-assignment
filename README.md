@@ -306,13 +306,27 @@ components/
 - 모바일, 태블릿, 데스크톱에서 최적화된 레이아웃 및 사용자 경험 제공
 - Grid와 Flexbox를 활용한 유연한 레이아웃 구성으로 모든 기기에서 정상 동작
 
-### 7. 타입 안정성
+### 7. SEO 최적화
+
+각 페이지별로 최적화된 메타 태그를 설정하여 검색 엔진 최적화를 구현했습니다:
+
+- **홈 페이지**: 상표 검색 서비스 메인 페이지 SEO
+- **즐겨찾기 페이지**: 즐겨찾기 기능 설명 및 키워드 최적화
+- **통계 페이지**: 상표 데이터 통계 및 분석 페이지 SEO
+
+각 페이지는 다음과 같은 메타 태그를 포함합니다:
+- 페이지별 최적화된 title 및 description
+- Open Graph 태그 (og:title, og:description, og:image, og:type, og:url)
+- Twitter Card 태그 (twitter:card, twitter:title, twitter:description, twitter:image)
+- 검색 엔진을 위한 keywords 메타 태그
+
+### 8. 타입 안정성
 
 - TypeScript를 활용한 엄격한 타입 정의로 런타임 에러 사전 방지
 - 국가별 데이터 타입을 명확히 구분 (`KrTrademarkRaw`, `UsTrademarkRaw`)
 - 공통 인터페이스와 원본 타입을 분리하여 타입 안정성과 유연성 동시 확보
 
-### 8. 테스트 가능한 코드 구조
+### 9. 테스트 가능한 코드 구조
 
 - 순수 함수로 작성된 비즈니스 로직 (필터링, 정렬, 집계)
 - 의존성 주입을 통한 테스트 용이성 확보

@@ -1,6 +1,6 @@
 import { MainLayout } from "@/components/layout";
 import { StatisticsSkeleton } from "@/components/domain";
-import { ErrorMessage, PageHeader } from "@/components/common";
+import { ErrorMessage, PageHeader, SEO } from "@/components/common";
 import { useCountryQueries, useStatisticsData } from "./internal/hooks";
 import { StatisticsContent } from "./internal/components";
 
@@ -18,6 +18,11 @@ const StatisticsPage = () => {
 
   return (
     <MainLayout>
+      <SEO
+        title="상표 데이터 통계 및 분석 | 다국가 상표 검색 서비스"
+        description="한국, 미국 등 여러 국가의 상표 데이터를 기반으로 상태별 분포, 연도별 트렌드, 상품 분류별 통계, 등록 소요 기간 분석 등을 시각화하여 제공합니다."
+        keywords="상표 통계, 상표 분석, 상표 데이터 시각화, 국가별 상표 비교, 상표 현황 분석, MarkCloud"
+      />
       {hasError && (
         <ErrorMessage
           message={
